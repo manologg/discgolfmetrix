@@ -10,9 +10,6 @@ function loadCss() {
             if (typeof secondaryColor !== "undefined") {
                 response = response.replaceAll("#8d1950", secondaryColor);
             }
-            if (typeof lightPrimaryColor !== "undefined") {
-                response = response.replaceAll("#4f7097", lightPrimaryColor);
-            }
             if (typeof lightSecondaryColor !== "undefined") {
                 response = response.replaceAll("#ba7596", lightSecondaryColor);
             }
