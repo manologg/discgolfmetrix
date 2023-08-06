@@ -18,7 +18,8 @@ a:hover {
 
 .button.hollow,
 .button.hollow.alert,
-.main-header-meta i[class^=fi-] {
+.main-header-meta i[class^=fi-],
+.tabs-title.is-active font {
     color: #8d1950;
 }
 
