@@ -22,7 +22,7 @@ function loadCss() {
 }
 
 function fixIcons(){
-    $(".main-header-meta svg").after("<i class='fi-map'></i>Â ");
+    $(".main-header-meta svg").after("<i class='fi-map'></i> ");
     $(".main-header-meta svg").remove();
 }
 
