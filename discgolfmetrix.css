@@ -3,7 +3,19 @@
 /* MAIN COLOR */
 
 body,
-a:hover {
+a:hover,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small,
+.h5 small,
+.h6 small,
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
     color: #1b2633;
 }
 
