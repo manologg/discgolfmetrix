@@ -4,6 +4,7 @@ function loadCss() {
     $.ajax({
         url: "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/discgolfmetrix.css",
         success: function(response) {
+            console.log("response", response);
             $("head").append(`<style>${response}</style>`);
         }
     });
