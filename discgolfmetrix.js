@@ -97,4 +97,4 @@ if (typeof image !== "undefined") {
 const onlyFuture = (typeof showOnlyFutureSubcompetitions !== "undefined") && showOnlyFutureSubcompetitions; // default: show all
 loadSubcompetitionButtons(onlyFuture);
 
-//$(".breadcrumbs").hide();
+$(".breadcrumbs").hide();
