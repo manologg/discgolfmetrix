@@ -1,14 +1,44 @@
 /* COLORS  */
 
-body {
+/* MAIN COLOR */
+
+body,
+a:hover {
     color: #1b2633;
 }
 
 .title-bar,
 .top-bar, .top-bar ul,
-#top-menu-row .is-active {
+#top-menu-row .is-active,
+#subcompetitions .button {
     background-color: #1b2633;
 }
+
+/* SECONDARY COLOR */
+
+.button.hollow,
+.button.hollow.alert,
+.main-header-meta i[class^=fi-] {
+    color: #8d1950;
+}
+
+.button,
+.button.hollow:hover,
+.button.hollow.alert:hover,
+#competition-submenu .button:hover {
+    background-color: #8d1950;
+}
+
+.button.hollow,
+.button.hollow.alert {
+    border-color: #8d1950;
+}
+
+td.player-cell .expand-arrow:before {
+    border-color: transparent transparent transparent #8d1950;
+}
+
+/* LIGHT PRIMARY */
 
 a,
 #competition-submenu li a b,
@@ -16,42 +46,33 @@ font {
     color: #4f7097;
 }
 
-a:hover {
-    color: #1b2633;
-}
-
-.button {
-    background-color: #8d1950;
-}
+/* LIGHT SECONDARY */
 
 .button:hover {
     background-color: #ba7596;
 }
 
+/* LIGHTER SECONDARY */
+
+#competition-banner span {
+    color: #f6e7ee;
+}
+
+/* GRAY */
+
+#subcompetitions .button:hover {
+    background-color: #767c84;
+}
+
 .button.hollow,
 .button.hollow.alert {
     background-color: inherit;
-    color: #8d1950;
-    border-color: #8d1950;
 }
 
 .button.hollow:hover,
-.button.hollow.alert:hover {
-    background-color: #8d1950;
-    color: white;
-}
-
+.button.hollow.alert:hover,
 #competition-submenu .button:hover {
-    background-color: #8d1950;
     color: white;
-}
-
-.main-header-meta i[class^=fi-] {
-    color: #8d1950;
-}
-
-td.player-cell .expand-arrow:before {
-    border-color: transparent transparent transparent #8d1950;
 }
 
 /* BANNER */
@@ -68,7 +89,6 @@ td.player-cell .expand-arrow:before {
 #competition-banner span {
     position: absolute;
     font-family: Impact, fantasy;
-    color: #f6e7ee;
     transform: rotate(356deg);
 }
 
@@ -114,14 +134,6 @@ td.player-cell .expand-arrow:before {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.25rem;
-}
-
-#subcompetitions .button {
-    background-color: #1b2633;
-}
-
-#subcompetitions .button:hover {
-    background-color: #767c84;
 }
 
 .main-header .main-title .button-container {
