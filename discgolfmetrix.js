@@ -23,7 +23,7 @@ function loadBanner(image) {
     const textRegex = /#\d+|\d+er\ Runde|Finale|\d+\.\ Runde/gm;
     const bannerText = (childName.match(textRegex) || ['']).pop(); // empty in case it doesn't match
     const largerClass = bannerText.length < 4 ? 'larger' : ''; // if the name is something like "#123" it will be larger
-    const bannerDiv = `<div class='discgolffriends-banner'><img src='${image}'></img><span class='${largerClass}'>${bannerText}</span></div>`;
+    const bannerDiv = `<div id='competition-banner'><img src='${image}'></img><span class='${largerClass}'>${bannerText}</span></div>`;
     if (isMobile()) {
         $("#content").before(`<div class='mobile'>${bannerDiv}</div>`);
     }
