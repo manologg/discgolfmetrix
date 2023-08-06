@@ -1,6 +1,8 @@
+const REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
+
 function loadCss() {
     $.ajax({
-        url: "https://discgolffriends.de/static/css/discgolfmetrix.css",
+        url: REPO_BASE_URL + "discgolfmetrix.css"
         success: function(response) {
             $("head").append(`<style>${response}</style>`);
         }
