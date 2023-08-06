@@ -38,14 +38,6 @@ td.player-cell .expand-arrow:before {
     border-color: transparent transparent transparent #8d1950;
 }
 
-/* LIGHT PRIMARY */
-
-a,
-#competition-submenu li a b,
-font {
-    color: #4f7097;
-}
-
 /* LIGHT SECONDARY */
 
 .button:hover {
