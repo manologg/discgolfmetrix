@@ -19,7 +19,10 @@ a:hover {
 .button.hollow,
 .button.hollow.alert,
 .main-header-meta i[class^=fi-],
-.tabs-title.is-active font {
+.tabs-title.is-active font,
+a,
+#competition-submenu li a b,
+font {
     color: #8d1950;
 }
 
