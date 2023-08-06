@@ -60,6 +60,11 @@ td.player-cell .expand-arrow:before {
     position: relative;
 }
 
+#competition-banner img {
+    width: 100%;
+    height: auto;
+}
+
 #competition-banner span {
     position: absolute;
     font-family: Impact, fantasy;
