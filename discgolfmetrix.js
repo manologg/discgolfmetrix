@@ -4,8 +4,8 @@ function loadCss() {
     $.ajax({
         url: "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/discgolfmetrix.css",
         success: function(response) {
-            replacedColors = response.replace("#8d1950", "#760504");
-            $("head").append(`<style>${response}</style>`);
+            replacedColorsResponse = response.replace("#8d1950", "#760504");
+            $("head").append(`<style>${replacedColorsResponse}</style>`);
         }
     });
 }
