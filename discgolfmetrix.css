@@ -20,8 +20,6 @@ a:hover {
 .button.hollow.alert,
 .main-header-meta i[class^=fi-],
 .tabs-title.is-active font,
-a,
-#competition-submenu li a b,
 font {
     color: #8d1950;
 }
@@ -44,14 +42,13 @@ td.player-cell .expand-arrow:before {
 
 /* LIGHT SECONDARY */
 
-.button:hover {
-    background-color: #ba7596;
+a,
+#competition-submenu li a b {
+    color: #ba7596;
 }
 
-/* LIGHTER SECONDARY */
-
-#competition-banner span {
-    color: #f6e7ee;
+.button:hover {
+    background-color: #ba7596;
 }
 
 /* GRAY */
