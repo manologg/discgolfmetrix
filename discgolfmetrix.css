@@ -56,11 +56,11 @@ td.player-cell .expand-arrow:before {
 
 /* BANNER */
 
-.discgolffriends-banner {
+#competition-banner {
     position: relative;
 }
 
-.discgolffriends-banner span {
+#competition-banner span {
     position: absolute;
     font-family: Impact, fantasy;
     color: #f6e7ee;
@@ -73,13 +73,13 @@ td.player-cell .expand-arrow:before {
         display: none;
     }
 
-    .discgolffriends-banner span {
+    #competition-banner span {
         bottom: 2rem;
         right: 0.5rem;
         font-size: 1.25rem;
     }
 
-    .discgolffriends-banner span.larger {
+    #competition-banner span.larger {
         font-size: 2rem;
     }
 }
@@ -90,13 +90,13 @@ td.player-cell .expand-arrow:before {
         display: none;
     }
 
-    .discgolffriends-banner span {
+    #competition-banner span {
         bottom: 6rem;
         right: 1rem;
         font-size: 3rem;
     }
 
-    .discgolffriends-banner span.larger {
+    #competition-banner span.larger {
         font-size: 5rem;
     }
 }
