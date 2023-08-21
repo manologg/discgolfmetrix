@@ -2,7 +2,7 @@ const REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix
 
 function loadCss() {
     $.ajax({
-        url: "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/discgolfmetrix.css",
+        url: `${REPO_BASE_URL}/discgolfmetrix.css`,
         success: function(response) {
             if (typeof primaryColor !== "undefined") {
                 response = response.replaceAll("#1b2633", primaryColor);
