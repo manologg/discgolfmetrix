@@ -74,7 +74,7 @@ td.player-cell .expand-arrow:before {
 .button.hollow:hover,
 .button.hollow.alert:hover,
 #competition-submenu .button:hover {
-    color: white;
+    color: white !important;
 }
 
 /* BANNER */
