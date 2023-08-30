@@ -70,6 +70,7 @@ td.player-cell .expand-arrow:before {
     background-color: inherit;
 }
 
+.button-group .button,
 .button.hollow:hover,
 .button.hollow.alert:hover,
 #competition-submenu .button:hover {
