@@ -92,7 +92,7 @@ function loadSubcompetitionButtons(onlyFuture) {
 loadCss();
 fixIcons();
 if (typeof image !== "undefined") {
-    //loadBanner(image);
+    //loadBanner(image); Metrix added its own banner, this is not needed anymore
 }
 const onlyFuture = (typeof showOnlyFutureSubcompetitions !== "undefined") && showOnlyFutureSubcompetitions; // default: show all
 loadSubcompetitionButtons(onlyFuture);
