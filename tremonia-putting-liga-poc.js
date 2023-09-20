@@ -4,7 +4,7 @@ function hideFirstTable() {
 }
 
 function invertResultsTable() {
-  // noop
+  tbody.html($('tr',tbody).get().reverse());
 }
 
 
