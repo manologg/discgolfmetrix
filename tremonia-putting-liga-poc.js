@@ -1,1 +1,8 @@
-asd
+function invertResultsTable() {
+  // noop
+}
+
+
+/* MAIN */
+
+invertResultsTable();
