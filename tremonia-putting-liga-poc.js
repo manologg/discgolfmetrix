@@ -4,6 +4,7 @@ function hideFirstTable() {
 }
 
 function invertResultsTable() {
+  tbody = $("#id_results tbody:last()");
   tbody.html($('tr',tbody).get().reverse());
 }
 
