@@ -12,3 +12,4 @@ function invertResultsTable() {
 
 hideFirstTable();
 invertResultsTable();
+console("END tremonia-putting-liga-poc")
