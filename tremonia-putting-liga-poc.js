@@ -46,13 +46,13 @@ function sortTable(tbody) {
       $(tr).appendTo(tbody);
       sum = getSum(tr);
       lastSum = getSum($(tr).prev());
-      console.log('i: ', i, 'sum', sum, 'lastSum', lastSum');
       if (sum == lastSum) {
         position = $(tr).prev().find('td:first()').text();
       }
       else {
         position = i+1;
       }
+      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}');
       $(tr).find('td:first()').text(position);
     });
 }
@@ -72,7 +72,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:20';
+var version = '20:23';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
