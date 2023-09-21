@@ -50,19 +50,22 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-version = '13:24';
+const version = '15:46';
 console.log('version', version);
 
-tbody = $('#id_results tbody:last()');
-thead = $('#id_results thead:last()');
-uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
+const tbody = $('#id_results tbody:last()');
+const thead = $('#id_results thead:last()');
+const uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
+const isPuttingRound = $(".main-title").text().includes("Runde");
 
 removeColors(tbody);
 
 hideFirstTable();
-hideColumns(tbody, 'td', uselessColumns);
-hideColumns(thead, 'th', uselessColumns);
 
-sortTable(tbody);
+if (isPuttingRound) {
+  hideColumns(tbody, 'td', uselessColumns);
+  hideColumns(thead, 'th', uselessColumns); 
+  sortTable(tbody);
+}
 
 console.log('version', version);
