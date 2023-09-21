@@ -77,12 +77,12 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '20:02';
+var version = '20:11';
 console.log('version', version);
 
-const tbody = $('#id_results tbody:last()');
-const thead = $('#id_results thead:last()');
-const isPuttingRound = $(".main-title").text().includes("Runde");
+var tbody = $('#id_results tbody:last()');
+var thead = $('#id_results thead:last()');
+var isPuttingRound = $(".main-title").text().includes("Runde");
 var uselessColumns;
 
 removeColors(tbody);
