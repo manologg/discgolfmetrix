@@ -42,8 +42,8 @@ function sortTable(tbody) {
       $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
     })
     .sort((a, b) => getOrder(b) - getOrder(a))
+    .each((i, tr) => $(tr).appendTo(tbody))
     .each((i, tr) => {
-      $(tr).appendTo(tbody);
       if (isPuttingRound || i%2 == 0) {
         sum = getSum(tr);
         lastSum = getSum($(tr).prev());
@@ -54,11 +54,14 @@ function sortTable(tbody) {
           position = i+1;
         }
         $(tr).find('td:first()').text(position);
+        console.log('tr', tr);
+        console.log('prev', $(tr).prev());
         console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
       }
       else {
         console.log(`i: ${i}, no position`);
       }
+      console.log('-----------------------------------------');
     });
 }
 
@@ -77,7 +80,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:41';
+var version = '20:50';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
