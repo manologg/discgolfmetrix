@@ -28,7 +28,7 @@ function sortTable(tbody) {
   tbody
     .find('tr')
     .each((i, tr) => {
-      if (isPuttingRound || i%2) {
+      if (isPuttingRound || i%2 == 1) {
         sourceTr = tr;
         orderModifier = i-1;
       }
@@ -44,7 +44,7 @@ function sortTable(tbody) {
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => {
       $(tr).appendTo(tbody);
-      if (isPuttingRound || !i%2) {
+      if (isPuttingRound || i%2 == 0) {
         sum = getSum(tr);
         lastSum = getSum($(tr).prev());
         if (sum == lastSum) {
@@ -77,7 +77,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:23';
+var version = '20:41';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
