@@ -44,16 +44,21 @@ function sortTable(tbody) {
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => {
       $(tr).appendTo(tbody);
-      sum = getSum(tr);
-      lastSum = getSum($(tr).prev());
-      if (sum == lastSum) {
-        position = $(tr).prev().find('td:first()').text();
+      if (isPuttingRound || !i%2) {
+        sum = getSum(tr);
+        lastSum = getSum($(tr).prev());
+        if (sum == lastSum) {
+          position = $(tr).prev().find('td:first()').text();
+        }
+        else {
+          position = i+1;
+        }
+        $(tr).find('td:first()').text(position);
+        console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
       }
       else {
-        position = i+1;
+        console.log(`i: ${i}, no position`);
       }
-      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
-      $(tr).find('td:first()').text(position);
     });
 }
 
