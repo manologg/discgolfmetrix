@@ -38,7 +38,7 @@ uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
 hideColumns(tbody, 'td', uselessColumns);
 hideColumns(thead, 'th', uselessColumns);
 
-invertTable(tbody);
+sortTable(tbody);
 
 removeColors(tbody);
 
