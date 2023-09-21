@@ -1,18 +1,29 @@
 function hideFirstTable() {
-  $("#id_results tbody:first()").hide();
-  $("#id_results thead:first()").hide();
+  $('#id_results tbody:first()').hide();
+  $('#id_results thead:first()').hide();
 }
 
-function invertTable(table) {
-  table.html($("tr", table).get().reverse());
+function getSum(tr) {
+    return Number($(tr).find('td:last()').text());
+}
+
+function sortTable(trContainer) {
+  trContainer
+    .find('tr')
+    .sort((a, b) => getSum(b) - getSum(a))
+    .each((i, elem) => $(elem).appendTo(tbody));
 }
 
 function hideColumns(trContainer, columnType, columnSelectors) {
-  columnSelectors.forEach(selector => trContainer.find(`tr ${columnType}:${selector}`).hide());
+  columnSelectors.forEach(
+    selector => trContainer.find(`tr ${columnType}:${selector}`).hide()
+  );
 }
 
 function removeColors(tdContainer) {
-  $(tdContainer).find("td").css('background-color', 'unset')
+  $(tdContainer)
+    .find('td')
+    .css('background-color', 'unset')
 }
 
 
@@ -20,8 +31,8 @@ function removeColors(tdContainer) {
 
 hideFirstTable();
 
-tbody = $("#id_results tbody:last()");
-thead = $("#id_results thead:last()");
+tbody = $('#id_results tbody:last()');
+thead = $('#id_results thead:last()');
 uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
 
 hideColumns(tbody, 'td', uselessColumns);
@@ -31,4 +42,4 @@ invertTable(tbody);
 
 removeColors(tbody);
 
-console.log('12:31')
+console.log('version 12:47')
