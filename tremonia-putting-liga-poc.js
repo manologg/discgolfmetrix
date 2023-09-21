@@ -41,7 +41,7 @@ function sortTable(tbody) {
       }
       sum = calculateSum(sourceTr);
       setSum(tr, sum);
-      setOrder(tr, sum * 100 + orderModifier);
+      setOrder(tr, sum * 100 + orderModifier+1);
       //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
     })
     .each((i, tr) => console.log(getOrder(tr)))
