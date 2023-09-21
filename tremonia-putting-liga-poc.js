@@ -115,23 +115,29 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var tbody = $('#id_results tbody:last()');
-var thead = $('#id_results thead:last()');
-var isPuttingRound = $(".main-title").text().includes("Runde");
-var uselessColumns;
+var isPuttingRound = $(".main-title").text().includes('Runde');
+var isMainCompetition = !$(".main-title").text().includes('&rarr;');
 
-removeColors(tbody);
-
-hideFirstTable();
-
-if (isPuttingRound) {
-  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
+if (isMainCompetition) {
+  $('body').css('background-color' 'red');
 }
 else {
-  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
+
+  var tbody = $('#id_results tbody:last()');
+  var thead = $('#id_results thead:last()');
+  var uselessColumns;
+    if (isPuttingRound) {
+    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
+  }
+  else {
+    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
+  }
+  
+  removeColors(tbody);
+  hideFirstTable();
+
+  hideColumns(tbody, 'td', uselessColumns);
+  hideColumns(thead, 'th', uselessColumns);
+
+  sortTable(tbody);
 }
-
-hideColumns(tbody, 'td', uselessColumns);
-hideColumns(thead, 'th', uselessColumns);
-
-sortTable(tbody);
