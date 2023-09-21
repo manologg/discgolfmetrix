@@ -67,8 +67,10 @@ function sortTable(tbody) {
         position = getPosition(lastTr);
       }
       console.log('tr', tr);
-      console.log('prev', $(tr).prev()[0]);
-      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
+      console.log('lastTr', lastTr);
+      console.log('sum', sum);
+      console.log('lastSum', lastSum);
+      console.log(`i: ${i}, position: ${position}`);
       setPosition(tr, position);
       $(tr).find('td:first()').text(position);
       console.log('-----------------------------------------');
@@ -90,7 +92,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:59';
+var version = '21:00';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
