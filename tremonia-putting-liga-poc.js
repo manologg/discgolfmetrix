@@ -32,7 +32,7 @@ function sortTable(tbody) {
         orderModifier = i+1;
       }
       setOrder(tr, calculateSum(sourceTr) * 10 + orderModifier);
-      $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
+      //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
     })
     .each((i, tr) => console.log(getOrder(tr)))
     .sort((a, b) => getOrder(b) - getOrder(a))
