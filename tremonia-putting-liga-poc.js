@@ -1,3 +1,7 @@
+if (typeof DEBUG !== "undefined") {
+  DEBUG = false;
+}
+
 function hideFirstTable() {
   $('#id_results tbody:first()').hide();
   $('#id_results thead:first()').hide();
@@ -101,12 +105,7 @@ function removeColors(tdContainer) {
     .css('background-color', 'unset')
 }
 
-
 /* MAIN */
-
-if (typeof DEBUG !== "undefined") {
-  DEBUG = false;
-}
 
 var tbody = $('#id_results tbody:last()');
 var thead = $('#id_results thead:last()');
