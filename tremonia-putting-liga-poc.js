@@ -56,7 +56,7 @@ console.log('version', version);
 const tbody = $('#id_results tbody:last()');
 const thead = $('#id_results thead:last()');
 const isPuttingRound = $(".main-title").text().includes("Runde");
-const uselessColumns;
+var uselessColumns;
 
 removeColors(tbody);
 
