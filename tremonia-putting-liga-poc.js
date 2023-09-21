@@ -1,6 +1,4 @@
-if (typeof DEBUG !== "undefined") {
-  DEBUG = false;
-}
+DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 function hideFirstTable() {
   $('#id_results tbody:first()').hide();
