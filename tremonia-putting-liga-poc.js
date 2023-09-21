@@ -117,6 +117,7 @@ function removeColors(tdContainer) {
 
 var isPuttingRound = $(".main-title").text().includes('Runde');
 var isMainCompetition = !$(".main-title").text().includes('→');
+alert(isMainCompetition);
 
 if (isMainCompetition) {
   $('body').css('background-color', 'red');
