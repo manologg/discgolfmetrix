@@ -55,7 +55,6 @@ console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
 const thead = $('#id_results thead:last()');
-const uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
 const isPuttingRound = $(".main-title").text().includes("Runde");
 
 removeColors(tbody);
@@ -63,9 +62,14 @@ removeColors(tbody);
 hideFirstTable();
 
 if (isPuttingRound) {
-  hideColumns(tbody, 'td', uselessColumns);
-  hideColumns(thead, 'th', uselessColumns); 
+  const uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
   sortTable(tbody);
 }
+else {
+  const uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'])
+}
+
+hideColumns(tbody, 'td', uselessColumns);
+hideColumns(thead, 'th', uselessColumns); 
 
 console.log('version', version);
