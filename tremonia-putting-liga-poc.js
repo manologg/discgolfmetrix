@@ -46,6 +46,7 @@ function sortTable(tbody) {
       $(tr).appendTo(tbody);
       sum = getSum(tr);
       lastSum = getSum($(tr).prev());
+      console.log('i: ', i, 'sum', sum, 'lastSum', lastSum');
       if (sum == lastSum) {
         position = $(tr).prev().find('td:first()').text();
       }
@@ -71,7 +72,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:15';
+var version = '20:20';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
