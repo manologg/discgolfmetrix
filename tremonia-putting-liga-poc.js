@@ -7,11 +7,15 @@ function setSum(tr) {
     return $(tr).data('sum', Number($(tr).find('td:last()').text()));
 }
 
+function getSum(tr) {
+    return $(tr).data('sum');
+}
+
 function sortTable(tbody) {
   tbody
     .find('tr')
     .each((i, elem) => setSum(elem))
-    .sort((a, b) => $(b).data('sum') - $(a).data('sum'))
+    .sort((a, b) => getSum(b) - getSum(a))
     .each((i, elem) => {
       $(elem).appendTo(tbody);
       console.log($(elem).find.('td:last()').text
@@ -33,7 +37,9 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-console.log('version 13:03')
+version = '13:04';
+
+console.log('version', version);
 
 hideFirstTable();
 
@@ -48,4 +54,4 @@ sortTable(tbody);
 
 removeColors(tbody);
 
-console.log('version 13:03')
+console.log('version', version);
