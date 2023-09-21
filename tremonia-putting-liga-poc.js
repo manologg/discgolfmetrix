@@ -64,16 +64,26 @@ function sortTable(tbody) {
       sum = getSum(tr);
       lastSum = getSum(lastTr);
       lastPosition = getPosition(lastTr);
-      if (isPuttingRound || i%2 == 0) {
+      
+      if (isPuttingRound) {
+        
         if (sum == lastSum) {
           position = lastPosition;
         }
         else {
-          position = i/2+1;
+          position = i+1;
         }
       }
-      else {
-        position = lastPosition;
+      else if (i%2 == 0) { // odd rows
+          if (sum == lastSum) {
+            position = lastPosition;
+          }
+          else {
+            position = i/2+1;
+          }
+      }
+      else { // even rows
+          position = lastPosition;
       }
       if (DEBUG) {
         console.log('tr', tr);
