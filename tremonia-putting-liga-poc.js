@@ -12,7 +12,7 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 }
 
 function removeColors(tdContainer) {
-  $(tdContainer).find("td").css('background-color', 'unset !important')
+  $(tdContainer).find("td").css('background-color', 'unset')
 }
 
 
