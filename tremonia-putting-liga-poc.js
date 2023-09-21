@@ -11,8 +11,8 @@ function hideColumns(trContainer, columnType, columnSelectors) {
   columnSelectors.forEach(selector => trContainer.find(`tr ${columnType}:${selector}`).hide());
 }
 
-function removeColors(tbody) {
-  $(tbody).find("td").css('background-color', 'unset !important')
+function removeColors(tdContainer) {
+  $(tdContainer).find("td").css('background-color', 'unset !important')
 }
 
 
@@ -29,4 +29,4 @@ hideColumns(thead, 'th', uselessColumns);
 
 invertTable(tbody);
 
-removeColors();
+removeColors(tbody);
