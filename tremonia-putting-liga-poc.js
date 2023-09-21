@@ -3,15 +3,19 @@ function hideFirstTable() {
   $('#id_results thead:first()').hide();
 }
 
-function getSum(tr) {
-    return Number($(tr).find('td:last()').text());
+function setSum(tr) {
+    return $(tr).data('sum', Number($(tr).find('td:last()').text()));
 }
 
-function sortTable(trContainer) {
-  trContainer
+function sortTable(tbody) {
+  tbody
     .find('tr')
-    .sort((a, b) => getSum(b) - getSum(a))
-    .each((i, elem) => $(elem).appendTo(tbody));
+    .each((i, elem) => setSum(elem))
+    .sort((a, b) => $(b).data('sum') - $(a).data('sum'))
+    .each((i, elem) => {
+      $(elem).appendTo(tbody);
+      console.log($(elem).find.('td:last()').text
+    });
 }
 
 function hideColumns(trContainer, columnType, columnSelectors) {
@@ -29,7 +33,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-console.log('version 12:48')
+console.log('version 13:03')
 
 hideFirstTable();
 
@@ -44,4 +48,4 @@ sortTable(tbody);
 
 removeColors(tbody);
 
-console.log('version 12:48')
+console.log('version 13:03')
