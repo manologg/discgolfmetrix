@@ -121,6 +121,7 @@ var tbody;
 
 if (isMainCompetition) {
   tbody = $('.data tbody:first()');
+  $(tbody).css('background-color', 'red');
 }
 else {
 
@@ -142,4 +143,4 @@ else {
 }
 
 sortTable(tbody);
-alert(`isMainCompetition: ${isMainCompetition}`);
+alert(`1 isMainCompetition: ${isMainCompetition}`);
