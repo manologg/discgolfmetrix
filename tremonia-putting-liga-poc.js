@@ -120,7 +120,7 @@ var isMainCompetition = !$(".main-title").text().includes('→');
 var tbody;
 
 if (isMainCompetition) {
-  tbody = $('.data tbody:first()');
+  tbody = $('.data tbody');
   $(tbody).css('background-color', 'red');
 }
 else {
@@ -143,4 +143,4 @@ else {
 }
 
 sortTable(tbody);
-alert(`1 isMainCompetition: ${isMainCompetition}`);
+alert(`2 isMainCompetition: ${isMainCompetition}`);
