@@ -3,12 +3,16 @@ function hideFirstTable() {
   $("#id_results thead:first()").hide();
 }
 
-function invertTable(tbody) {
-  tbody.html($('tr',tbody).get().reverse());
+function invertTable(table) {
+  table.html($("tr", table).get().reverse());
 }
 
 function hideColumns(trContainer, columnType, columnSelectors) {
   columnSelectors.forEach(selector => trContainer.find(`tr ${columnType}:${selector}`).hide());
+}
+
+function removeColors(tbody) {
+  $(tbody).find("td").css('background-color', 'unset !important')
 }
 
 
@@ -24,3 +28,5 @@ hideColumns(tbody, 'td', uselessColumns);
 hideColumns(thead, 'th', uselessColumns);
 
 invertTable(tbody);
+
+removeColors();
