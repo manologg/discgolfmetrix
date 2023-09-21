@@ -119,10 +119,10 @@ var isPuttingRound = $(".main-title").text().includes('Runde');
 var isMainCompetition = !$(".main-title").text().includes('→');
 
 if (isMainCompetition) {
-  $('body').css('background-color' 'red');
+  $('body').css('background-color', 'red');
 }
 else {
-
+  $('body').css('background-color', 'green');
   var tbody = $('#id_results tbody:last()');
   var thead = $('#id_results thead:last()');
   var uselessColumns;
