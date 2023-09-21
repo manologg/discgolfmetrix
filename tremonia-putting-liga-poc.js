@@ -104,6 +104,10 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
+if (typeof DEBUG !== "undefined") {
+  DEBUG = false;
+}
+
 var tbody = $('#id_results tbody:last()');
 var thead = $('#id_results thead:last()');
 var isPuttingRound = $(".main-title").text().includes("Runde");
