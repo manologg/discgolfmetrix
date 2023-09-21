@@ -66,7 +66,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '19:43';
+const version = '19:44';
 console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
