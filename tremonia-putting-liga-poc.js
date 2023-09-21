@@ -39,7 +39,7 @@ function sortTable(tbody) {
         sourceTr = $(tr).next();
         orderModifier = i+1;
       }
-      sum = calculateSum(sourceTs);
+      sum = calculateSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier);
       //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
@@ -77,7 +77,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '19:53';
+const version = '19:54';
 console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
