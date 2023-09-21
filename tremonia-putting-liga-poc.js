@@ -125,7 +125,7 @@ removeColors(tbody);
 hideFirstTable();
 
 if (isPuttingRound) {
-  uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
+  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
 }
 else {
   uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
