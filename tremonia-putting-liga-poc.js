@@ -7,12 +7,20 @@ function calculateSum(tr) {
   return Number($(tr).find('td:last()').text());
 }
 
-function setOrder(tr, sum) {
-  $(tr).data('order', sum);
+function setSum(tr, sum) {
+  $(tr).data('sum', sum);
+}
+
+function setOrder(tr, order) {
+  $(tr).data('order', order);
 }
 
 function getOrder(tr) {
   return $(tr).data('order');
+}
+
+function getSum(tr) {
+  return $(tr).data('sum');
 }
 
 function sortTable(tbody) {
@@ -31,19 +39,22 @@ function sortTable(tbody) {
         sourceTr = $(tr).next();
         orderModifier = i+1;
       }
-      setOrder(tr, calculateSum(sourceTr) * 10 + orderModifier);
+      sum = calculateSum(sourceTs);
+      setSum(tr, sum);
+      setOrder(tr, sum * 100 + orderModifier);
       //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
     })
     .each((i, tr) => console.log(getOrder(tr)))
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => {
       $(tr).appendTo(tbody);
-      sum = getOrder(tr);
+      sum = getSum(tr);
+      //lastSum = getSum($(tr).prev());
       if (sum == lastSum) {
         position = lastPosition;
       }
       else {
-        position = i + 1;
+        position = i+1;
       }
       $(tr).find('td:first()').text(position);
       lastPosition = position;
@@ -66,7 +77,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '19:44';
+const version = '19:53';
 console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
