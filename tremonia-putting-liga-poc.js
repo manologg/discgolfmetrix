@@ -56,17 +56,18 @@ console.log('version', version);
 const tbody = $('#id_results tbody:last()');
 const thead = $('#id_results thead:last()');
 const isPuttingRound = $(".main-title").text().includes("Runde");
+const uselessColumns;
 
 removeColors(tbody);
 
 hideFirstTable();
 
 if (isPuttingRound) {
-  const uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
+  uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
   sortTable(tbody);
 }
 else {
-  const uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
+  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
 }
 
 hideColumns(tbody, 'td', uselessColumns);
