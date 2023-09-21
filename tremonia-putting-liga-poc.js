@@ -5,7 +5,7 @@ function hideFirstTable() {
   $('#id_results thead:first()').hide();
 }
 
-function calculateSum(tr) {
+function findSum(tr) {
   return Number($(tr).find('td:last()').text());
 }
 
@@ -45,7 +45,7 @@ function sortTable(tbody) {
   tbody
     .find('tr')
     .each((i, tr) => {
-      if (isPuttingRound || i%2 == 1) {
+      if (isMainCompetition || isPuttingRound || i%2 == 1) {
         sourceTr = tr;
         orderModifier = i-1;
       }
@@ -53,7 +53,7 @@ function sortTable(tbody) {
         sourceTr = $(tr).next();
         orderModifier = i+1;
       }
-      sum = calculateSum(sourceTr);
+      sum = findSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier+1);
     })
@@ -65,7 +65,7 @@ function sortTable(tbody) {
       lastSum = getSum(lastTr);
       lastPosition = getPosition(lastTr);
       
-      if (isPuttingRound) {
+      if (isMainCompetition || isPuttingRound) {
         
         if (sum == lastSum) {
           position = lastPosition;
@@ -117,15 +117,15 @@ function removeColors(tdContainer) {
 
 var isPuttingRound = $(".main-title").text().includes('Runde');
 var isMainCompetition = !$(".main-title").text().includes('→');
-alert(isMainCompetition);
+var tbody;
 
 if (isMainCompetition) {
-  $('body').css('background-color', 'red');
+  tbody = $('.data tbody:first()');
 }
 else {
-  $('body').css('background-color', 'green');
-  var tbody = $('#id_results tbody:last()');
+
   var thead = $('#id_results thead:last()');
+  tbody = $('#id_results tbody:last()');
   var uselessColumns;
   if (isPuttingRound) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
@@ -139,6 +139,6 @@ else {
 
   hideColumns(tbody, 'td', uselessColumns);
   hideColumns(thead, 'th', uselessColumns);
-
-  sortTable(tbody);
 }
+
+sortTable(tbody);
