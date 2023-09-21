@@ -12,13 +12,26 @@ function getSum(tr) {
 }
 
 function sortTable(tbody) {
+
+  var lastPosition = 0;
+  var lastSum = Number.MAX_VALUE;
+  
   tbody
     .find('tr')
     .each((i, elem) => setSum(elem))
     .sort((a, b) => getSum(b) - getSum(a))
-    .each((i, elem) => {
-      $(elem).appendTo(tbody);
-      console.log($(elem).find.('td:last()').text
+    .each((i, tr) => {
+      $(tr).appendTo(tbody);
+      sum = getSum(tr);
+      if (sum == lastSum) {
+        position = lastPosition;
+      }
+      else {
+        position = i+1;
+      }
+      $(tr).find('td:first()').text(position);
+      lastPosition = position;
+      lastSum = sum;
     });
 }
 
@@ -37,7 +50,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-version = '13:04';
+version = '13:16';
 
 console.log('version', version);
 
