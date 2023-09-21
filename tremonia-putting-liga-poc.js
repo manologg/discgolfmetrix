@@ -11,6 +11,10 @@ function setSum(tr, sum) {
   $(tr).data('sum', sum);
 }
 
+function getSum(tr) {
+  return $(tr).data('sum');
+}
+
 function setOrder(tr, order) {
   $(tr).data('order', order);
 }
@@ -19,8 +23,12 @@ function getOrder(tr) {
   return $(tr).data('order');
 }
 
-function getSum(tr) {
-  return $(tr).data('sum');
+function setPosition(tr, position) {
+  $(tr).data('position', position);
+}
+
+function getPosition(tr) {
+  return $(tr).data('position');
 }
 
 function sortTable(tbody) {
@@ -44,23 +52,25 @@ function sortTable(tbody) {
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => $(tr).appendTo(tbody))
     .each((i, tr) => {
+      lastTr = $(tr).prev();
+      sum = getSum(tr);
+      lastSum = getSum(lastTr);
       if (isPuttingRound || i%2 == 0) {
-        sum = getSum(tr);
-        lastSum = getSum($(tr).prev());
         if (sum == lastSum) {
-          position = $(tr).prev().find('td:first()').text();
+          position = getPosition(lastTr);
         }
         else {
           position = i+1;
         }
-        $(tr).find('td:first()').text(position);
-        console.log('tr', tr);
-        console.log('prev', $(tr).prev());
-        console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
       }
       else {
-        console.log(`i: ${i}, no position`);
+        position = getPosition(lastTr);
       }
+      console.log('tr', tr);
+      console.log('prev', $(tr).prev()[0]);
+      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
+      setPosition(tr, position);
+      $(tr).find('td:first()').text(position);
       console.log('-----------------------------------------');
     });
 }
@@ -80,7 +90,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:50';
+var version = '20:59';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
