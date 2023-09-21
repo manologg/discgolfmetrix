@@ -55,16 +55,17 @@ function sortTable(tbody) {
       lastTr = $(tr).prev();
       sum = getSum(tr);
       lastSum = getSum(lastTr);
+      lastPosition = getPosition(lastTr);
       if (isPuttingRound || i%2 == 0) {
         if (sum == lastSum) {
-          position = getPosition(lastTr);
+          position = lastPosition;
         }
         else {
-          position = i+1;
+          position = i/2+1;
         }
       }
       else {
-        position = getPosition(lastTr);
+        position = lastPosition;
       }
       console.log('tr', tr);
       console.log('lastTr', lastTr[0]);
@@ -73,7 +74,9 @@ function sortTable(tbody) {
       console.log('lastPosition', getPosition(lastTr));
       console.log(`i: ${i}, position: ${position}`);
       setPosition(tr, position);
-      $(tr).find('td:first()').text(position);
+      if (isPuttingRound || i%2 == 0) {
+        $(tr).find('td:first()').text(position);
+      }
       console.log('-----------------------------------------');
     });
 }
@@ -93,7 +96,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '21:06';
+var version = '21:12';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
