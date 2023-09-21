@@ -68,7 +68,7 @@ if (isPuttingRound) {
 }
 else {
   uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
-  sortTable(tbody);
+  //sortTable(tbody);
 }
 
 hideColumns(tbody, 'td', uselessColumns);
