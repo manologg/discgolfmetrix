@@ -9,7 +9,9 @@ function calculateSum(tr) {
 
 function setData(tr, key, value) {
   $(tr).data(key, value);
-  $(tr).find('td:nth-child(2)').text(`${$(tr).find('td:nth-child(2)').text()}, ${key}: ${value}`);
+  if (DEBUG) {
+    $(tr).find('td:nth-child(2)').text(`${$(tr).find('td:nth-child(2)').text()}, ${key}: ${value}`);
+  }
 }
 
 function setSum(tr, sum) {
@@ -52,7 +54,6 @@ function sortTable(tbody) {
       sum = calculateSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier+1);
-      //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
     })
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => $(tr).appendTo(tbody))
@@ -72,12 +73,14 @@ function sortTable(tbody) {
       else {
         position = lastPosition;
       }
-      console.log('tr', tr);
-      console.log('lastTr', lastTr[0]);
-      console.log('sum', sum);
-      console.log('lastSum', lastSum);
-      console.log('lastPosition', getPosition(lastTr));
-      console.log(`i: ${i}, position: ${position}`);
+      if (DEBUG) {
+        console.log('tr', tr);
+        console.log('lastTr', lastTr[0]);
+        console.log('sum', sum);
+        console.log('lastSum', lastSum);
+        console.log('lastPosition', getPosition(lastTr));
+        console.log(`i: ${i}, position: ${position}`);
+      }
       setPosition(tr, position);
       if (isPuttingRound || i%2 == 0) {
         $(tr).find('td:first()').text(position);
@@ -101,9 +104,6 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '21:16';
-console.log('version', version);
-
 var tbody = $('#id_results tbody:last()');
 var thead = $('#id_results thead:last()');
 var isPuttingRound = $(".main-title").text().includes("Runde");
@@ -124,5 +124,3 @@ hideColumns(tbody, 'td', uselessColumns);
 hideColumns(thead, 'th', uselessColumns);
 
 sortTable(tbody);
-
-console.log('version', version);
