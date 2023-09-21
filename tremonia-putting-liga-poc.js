@@ -51,16 +51,15 @@ function removeColors(tdContainer) {
 /* MAIN */
 
 version = '13:16';
-
 console.log('version', version);
-
-removeColors(tbody);
-hideFirstTable();
 
 tbody = $('#id_results tbody:last()');
 thead = $('#id_results thead:last()');
 uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
 
+removeColors(tbody);
+
+hideFirstTable();
 hideColumns(tbody, 'td', uselessColumns);
 hideColumns(thead, 'th', uselessColumns);
 
