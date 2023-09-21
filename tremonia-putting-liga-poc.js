@@ -54,6 +54,7 @@ version = '13:16';
 
 console.log('version', version);
 
+removeColors(tbody);
 hideFirstTable();
 
 tbody = $('#id_results tbody:last()');
@@ -64,7 +65,5 @@ hideColumns(tbody, 'td', uselessColumns);
 hideColumns(thead, 'th', uselessColumns);
 
 sortTable(tbody);
-
-removeColors(tbody);
 
 console.log('version', version);
