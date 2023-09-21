@@ -42,7 +42,7 @@ function sortTable(tbody) {
       sum = calculateSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier+1);
-      //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
+      $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
     })
     .each((i, tr) => console.log(getOrder(tr)))
     .sort((a, b) => getOrder(b) - getOrder(a))
@@ -77,7 +77,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '20:00';
+const version = '20:02';
 console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
