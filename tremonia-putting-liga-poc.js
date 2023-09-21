@@ -7,8 +7,13 @@ function calculateSum(tr) {
   return Number($(tr).find('td:last()').text());
 }
 
+function setData(tr, key, value) {
+  $(tr).data(key, value);
+  $(tr).find('td:nth-child(2)').text(`${$(tr).find('td:nth-child(2)').text()}, ${key}: ${value}`);
+}
+
 function setSum(tr, sum) {
-  $(tr).data('sum', sum);
+  setData(tr, 'sum', sum)
 }
 
 function getSum(tr) {
@@ -16,7 +21,7 @@ function getSum(tr) {
 }
 
 function setOrder(tr, order) {
-  $(tr).data('order', order);
+  setData(tr, 'order', order);
 }
 
 function getOrder(tr) {
@@ -24,7 +29,7 @@ function getOrder(tr) {
 }
 
 function setPosition(tr, position) {
-  $(tr).data('position', position);
+  setData(tr, 'position', position);
 }
 
 function getPosition(tr) {
@@ -47,7 +52,7 @@ function sortTable(tbody) {
       sum = calculateSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier+1);
-      $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
+      //$(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
     })
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => $(tr).appendTo(tbody))
@@ -96,7 +101,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '21:12';
+var version = '21:16';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
