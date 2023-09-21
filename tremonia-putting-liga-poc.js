@@ -30,3 +30,5 @@ hideColumns(thead, 'th', uselessColumns);
 invertTable(tbody);
 
 removeColors(tbody);
+
+console.log('12:31')
