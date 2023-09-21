@@ -1,4 +1,4 @@
-const REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
+var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
 function loadCss() {
     $.ajax({
