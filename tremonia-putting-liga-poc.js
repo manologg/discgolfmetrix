@@ -29,6 +29,8 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
+console.log('version 12:48')
+
 hideFirstTable();
 
 tbody = $('#id_results tbody:last()');
@@ -42,4 +44,4 @@ sortTable(tbody);
 
 removeColors(tbody);
 
-console.log('version 12:47')
+console.log('version 12:48')
