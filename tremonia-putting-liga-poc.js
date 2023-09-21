@@ -3,12 +3,16 @@ function hideFirstTable() {
   $('#id_results thead:first()').hide();
 }
 
-function setSum(tr) {
-    return $(tr).data('sum', Number($(tr).find('td:last()').text()));
+function calculateSum(tr) {
+  return Number($(tr).find('td:last()').text());
 }
 
-function getSum(tr) {
-    return $(tr).data('sum');
+function setOrder(tr, sum) {
+  $(tr).data('order', sum);
+}
+
+function getOrder(tr) {
+  return $(tr).data('order');
 }
 
 function sortTable(tbody) {
@@ -18,16 +22,28 @@ function sortTable(tbody) {
   
   tbody
     .find('tr')
-    .each((i, elem) => setSum(elem))
-    .sort((a, b) => getSum(b) - getSum(a))
+    .each((i, tr) => {
+      if (isPuttingRound || i%2) {
+        sourceTr = tr;
+        orderModifier = i-1;
+      }
+      else {
+        sourceTr = $(tr).next();
+        orderModifier = i+1;
+      }
+      setOrder(tr, calculateSum(sourceTr) * 10 + orderModifier);
+      $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ' - ' + orderModifier + ' - ' + getOrder(tr));
+    })
+    .each((i, tr) => console.log(getOrder(tr)))
+    .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => {
       $(tr).appendTo(tbody);
-      sum = getSum(tr);
+      sum = getOrder(tr);
       if (sum == lastSum) {
         position = lastPosition;
       }
       else {
-        position = i+1;
+        position = i + 1;
       }
       $(tr).find('td:first()').text(position);
       lastPosition = position;
@@ -50,7 +66,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-const version = '16:17';
+const version = '17:16';
 console.log('version', version);
 
 const tbody = $('#id_results tbody:last()');
@@ -64,14 +80,14 @@ hideFirstTable();
 
 if (isPuttingRound) {
   uselessColumns = ['nth-child(3)', 'nth-last-child(2)'];
-  sortTable(tbody);
 }
 else {
   uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
-  //sortTable(tbody);
 }
 
 hideColumns(tbody, 'td', uselessColumns);
-hideColumns(thead, 'th', uselessColumns); 
+hideColumns(thead, 'th', uselessColumns);
+
+sortTable(tbody);
 
 console.log('version', version);
