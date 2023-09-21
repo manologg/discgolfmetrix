@@ -66,7 +66,7 @@ if (isPuttingRound) {
   sortTable(tbody);
 }
 else {
-  const uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'])
+  const uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(4)', 'nth-last-child(2)'];
 }
 
 hideColumns(tbody, 'td', uselessColumns);
