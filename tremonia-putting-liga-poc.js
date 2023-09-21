@@ -25,9 +25,6 @@ function getSum(tr) {
 
 function sortTable(tbody) {
 
-  var lastPosition = 0;
-  var lastSum = Number.MAX_VALUE;
-  
   tbody
     .find('tr')
     .each((i, tr) => {
@@ -44,21 +41,18 @@ function sortTable(tbody) {
       setOrder(tr, sum * 100 + orderModifier+1);
       $(tr).find('td:nth-child(2)').text($(tr).find('td:nth-child(2)').text() + ', sum: ' + getSum(tr) + ', orderModifier: ' + orderModifier + ', order: ' + getOrder(tr));
     })
-    .each((i, tr) => console.log(getOrder(tr)))
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => {
       $(tr).appendTo(tbody);
       sum = getSum(tr);
-      //lastSum = getSum($(tr).prev());
+      lastSum = getSum($(tr).prev());
       if (sum == lastSum) {
-        position = lastPosition;
+        position = $(tr).prev().find('td:first()').text();
       }
       else {
         position = i+1;
       }
       $(tr).find('td:first()').text(position);
-      lastPosition = position;
-      lastSum = sum;
     });
 }
 
@@ -77,7 +71,7 @@ function removeColors(tdContainer) {
 
 /* MAIN */
 
-var version = '20:11';
+var version = '20:15';
 console.log('version', version);
 
 var tbody = $('#id_results tbody:last()');
