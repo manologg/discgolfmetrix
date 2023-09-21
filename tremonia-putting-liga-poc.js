@@ -52,7 +52,7 @@ function sortTable(tbody) {
       else {
         position = i+1;
       }
-      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}');
+      console.log(`i: ${i}, sum: ${sum}, lastSum: ${lastSum} => position: ${position}`);
       $(tr).find('td:first()').text(position);
     });
 }
