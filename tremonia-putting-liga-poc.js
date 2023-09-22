@@ -92,12 +92,12 @@ function sortTable(tbody) {
         console.log('lastSum', lastSum);
         console.log('lastPosition', getPosition(lastTr));
         console.log(`i: ${i}, position: ${position}`);
+        console.log('-----------------------------------------')
       }
       setPosition(tr, position);
-      if (isPuttingRound || i%2 == 0) {
+      if (isMainCompetition || isPuttingRound || i%2 == 0) {
         $(tr).find('td:first()').text(position);
       }
-      console.log('-----------------------------------------');
     });
 }
 
@@ -120,8 +120,7 @@ var isMainCompetition = !$(".main-title").text().includes('→');
 var tbody;
 
 if (isMainCompetition) {
-  tbody = $('.data tbody');
-  $(tbody).css('background-color', 'red');
+  tbody = $('.data tbody:last()');
 }
 else {
 
@@ -143,4 +142,4 @@ else {
 }
 
 sortTable(tbody);
-alert(`2 isMainCompetition: ${isMainCompetition}`);
+alert(`3 isMainCompetition: ${isMainCompetition}`);
