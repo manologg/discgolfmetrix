@@ -142,4 +142,4 @@ else {
 }
 
 sortTable(tbody);
-alert(`3 isMainCompetition: ${isMainCompetition}`);
+//alert(`3 isMainCompetition: ${isMainCompetition}`);
