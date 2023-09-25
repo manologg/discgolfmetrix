@@ -127,7 +127,7 @@ function setTdSums(i, tr) {
 
     var sum = Array.from(allScores).reduce((a, b) => a + b);
 
-    if (currentCompetition === ROUND) {
+    if (currentCompetition === TOURNAMENT) {
       displaySubSum(tr, sum);
     }
     setSubSum(tr, sum);
