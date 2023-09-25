@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '14:09';
+var VERSION = '14:15';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = false;
@@ -163,7 +163,9 @@ function setTrSumAndOrder(i, tr) {
     sum = parseSum(sourceTr);
   }
 
-  $(tr).find('td:last()').text(sum);
+  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
+    $(tr).find('td:last()').text(sum);
+  }
   setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
