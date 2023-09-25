@@ -2,8 +2,9 @@ DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 const currentCompetition = $(".main-title").text().match(/→/g).length;
+
 // competition levels
-const LEAGUE = 0,
+const LEAGUE = 0;
 const TOURNAMENT = 1;
 const ROUND = 2;
 
