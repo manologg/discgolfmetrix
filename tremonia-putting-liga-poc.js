@@ -1,4 +1,4 @@
-var VERSION = '12:29';
+var VERSION = '12:30';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
