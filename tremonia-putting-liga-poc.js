@@ -5,7 +5,7 @@ function hideFirstTable() {
   $('#id_results thead:first()').hide();
 }
 
-function findSum(tr) {
+function parseSum(tr) {
   return Number($(tr).find('td:last()').text());
 }
 
@@ -40,12 +40,8 @@ function getPosition(tr) {
   return $(tr).data('position');
 }
 
-function sortTable(tbody) {
-
-  tbody
-    .find('tr')
-    .each((i, tr) => {
-      if (isMainCompetition || isPuttingRound || i%2 == 1) {
+function setSumAndOrder(i, tr) {
+  if (isMainCompetition || isPuttingRound || i%2 == 1) {
         sourceTr = tr;
         orderModifier = i-1;
       }
@@ -53,10 +49,16 @@ function sortTable(tbody) {
         sourceTr = $(tr).next();
         orderModifier = i+1;
       }
-      sum = findSum(sourceTr);
+      sum = parseSum(sourceTr);
       setSum(tr, sum);
       setOrder(tr, sum * 100 + orderModifier+1);
-    })
+}
+
+function sortTable(tbody) {
+
+  tbody
+    .find('tr')
+    .each(setSumAndOrder)
     .sort((a, b) => getOrder(b) - getOrder(a))
     .each((i, tr) => $(tr).appendTo(tbody))
     .each((i, tr) => {
@@ -142,4 +144,5 @@ else {
 }
 
 sortTable(tbody);
-//alert(`3 isMainCompetition: ${isMainCompetition}`);
+
+console.log('10:29');
