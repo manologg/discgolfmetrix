@@ -140,13 +140,11 @@ function setTrSumAndOrder(i, tr) {
     }
     // currentCompetition === TOURNAMENT
     else if (i%2 == 1) { // even rows
-      sum = getSubSum($(tr).prev());
-      sum = getSubSum(tr);
+      sum = getSubSum($(tr).prev()) + getSubSum(tr);
       orderModifier = i-1;
     }
     else { // odd rows
-      sum = getSubSum(tr);
-      sum = getSubSum($(tr).next());
+      sum = getSubSum(tr) + getSubSum($(tr).next());
       orderModifier = i+1;
     }
     
@@ -163,9 +161,10 @@ function setTrSumAndOrder(i, tr) {
     }
     
     sum = parseSum(sourceTr);
-    setSum(tr, sum);
   }
-  
+
+  $(tr).find('td:last()').text(sum);
+  setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
 
@@ -270,4 +269,4 @@ tbody.find('tr')
      .each((i, tr) => $(tr).appendTo(tbody))
      .each(setTrPosition);
 
-console.log(VERSION);
+alert(VERSION);
