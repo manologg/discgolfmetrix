@@ -1,9 +1,9 @@
-var VERSION = '11:07';
+var VERSION = '11:17';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
-var currentCompetition = $(".main-title").text().match(/→/g).length;
+var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
 
 // competition levels
 var LEAGUE = 0;
