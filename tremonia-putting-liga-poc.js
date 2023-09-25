@@ -64,7 +64,7 @@ function setTdStationsSum(i, td) {
   var scoreMultiplicator = stations[i+1];
   var score = putts * scoreMultiplicator;
   $(td).text(score);
-  $(td).append(`<span>${putts}</span>`)
+  $(td).append(`<span class="putts">${putts}</span>`)
   
   if (DEBUG) {
     console.log('td', td);
@@ -161,6 +161,9 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 }
 
 /* MAIN */
+
+loadCss();
+
 var tbody;
 
 if (currentCompetition === LEAGUE) {
@@ -192,7 +195,7 @@ else {
 
 tbody.find('tr')
      // this is just an experiment!!!
-     //.each(setTrStationsSum)
+     .each(setTrStationsSum)
      .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
      .each((i, tr) => $(tr).appendTo(tbody))
