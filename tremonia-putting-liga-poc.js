@@ -151,4 +151,4 @@ else {
 
 sortTable(tbody);
 
-console.log('10:29');
+console.log('10:41');
