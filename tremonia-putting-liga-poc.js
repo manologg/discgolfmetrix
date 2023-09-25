@@ -74,6 +74,7 @@ function getPosition(tr) {
 }
 
 var stations = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
+var MAX_PUTTS_PER_STATION = 3;
 function setTdStationsSum(i, td) {
 
   var putts = Number($(td).text()) || 0;
@@ -84,6 +85,10 @@ function setTdStationsSum(i, td) {
   $(td).text(score);
   $(td).addClass('tpl-points');
   $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
+  if (putts > MAX_PUTTS_PER_STATION) {
+    $(td).addClass('tpl-error');
+  }
+    
   
   if (DEBUG) {
     console.log('td', td);
