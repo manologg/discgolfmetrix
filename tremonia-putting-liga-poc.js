@@ -10,7 +10,7 @@ var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
 
 // competition levels
 var LEAGUE = 0;
-var TOURNAMENT = 1;e
+var TOURNAMENT = 1;
 var ROUND = 2;
 
 function loadCss() {
