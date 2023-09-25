@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.tpl-error {
+  background-color: red;
+}
+
 .tpl-putts {
   font-size: smaller;
   color: lightgray;
