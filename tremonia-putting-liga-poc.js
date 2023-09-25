@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '13:46';
+var VERSION = '13:54';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -47,6 +47,14 @@ function setScore(td, points) {
 
 function getScore(td) {
   return $(td).data('score');
+}
+
+function setSubSum(tr, subSum) {
+  setData(tr, 'subSum', subSum)
+}
+
+function getSubSum(tr) {
+  return $(tr).data('subSum');
 }
 
 function setSum(tr, sum) {
@@ -115,6 +123,7 @@ function setTdSums(i, tr) {
 
     var sum = Array.from(allScores).reduce((a, b) => a + b);
     $(tr).find('td:nth-last-child(3)').text(sum);
+    setSubSum(tr, sum);
   }
 }
 
@@ -125,17 +134,25 @@ function setTrSumAndOrder(i, tr) {
   
   if ($(".main-title").text().includes('2. Spieltag')) {
 
-    if (currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
-      sourceTr = tr;
+    if (currentCompetition === ROUND) {
+      sum = getSubSum(tr);
       orderModifier = i-1;
     }
-    else {
-      sourceTr = $(tr).next();
+    // currentCompetition === TOURNAMENT
+    else if (i%2 == 1) { // even rows
+      sum = getSubSum(tr.prev());
+      sum = getSubSum(tr);
+      orderModifier = i-1;
+    }
+    else { // odd rows
+      sum = getSubSum(tr);
+      sum = getSubSum(tr.next());
       orderModifier = i+1;
     }
     
   }
   else {
+    
     if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
       sourceTr = tr;
       orderModifier = i-1;
@@ -144,10 +161,11 @@ function setTrSumAndOrder(i, tr) {
       sourceTr = $(tr).next();
       orderModifier = i+1;
     }
+    
+    sum = parseSum(sourceTr);
+    setSum(tr, sum);
   }
   
-  sum = parseSum(sourceTr);
-  setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
 
