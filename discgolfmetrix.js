@@ -70,7 +70,7 @@ function loadSubcompetitionButtons(onlyFuture) {
                         }
             };
             
-            if (response.Competition.Events) {
+            if (response.Competition.Events || response.Competition.SubCompetitions) {
                 $(".main-header .main-title").after("<div id='subcompetitions'/>");
             }
             response.Competition.Events?.forEach(function(event){
