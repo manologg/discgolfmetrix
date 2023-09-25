@@ -105,4 +105,3 @@ const onlyFuture = (typeof showOnlyFutureSubcompetitions !== "undefined") && sho
 loadSubcompetitionButtons(onlyFuture);
 
 $(".breadcrumbs").hide();
-console.log('10:14')
