@@ -1,9 +1,9 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '16:19';
+var VERSION = '16:20';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
-var DEBUG = true;
+var DEBUG = false;
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
