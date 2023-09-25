@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '13:36';
+var VERSION = '13:46';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -114,7 +114,7 @@ function setTdSums(i, tr) {
                      .map((i, td) => getScore(td));
 
     var sum = Array.from(allScores).reduce((a, b) => a + b);
-    
+    $(tr).find('td:nth-last-child(3)').text(sum);
   }
 }
 
