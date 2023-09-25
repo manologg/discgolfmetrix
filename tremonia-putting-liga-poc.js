@@ -34,19 +34,19 @@ function setData(tr, key, value) {
 }
 
 function setPutts(td, putts) {
-  setData(tr, 'putts', putts)
+  setData(td, 'putts', putts)
 }
 
 function getPutts(td) {
-  return $(tr).data('putts');
+  return $(td).data('putts');
 }
 
 function setScore(td, points) {
-  setData(tr, 'score', points)
+  setData(td, 'score', points)
 }
 
 function getScore(td) {
-  return $(tr).data('score');
+  return $(td).data('score');
 }
 
 function setSum(tr, sum) {
