@@ -44,67 +44,63 @@ function getPosition(tr) {
 }
 
 function setSumAndOrder(i, tr) {
+  
   if (isMainCompetition || isPuttingRound || i%2 == 1) {
-        sourceTr = tr;
-        orderModifier = i-1;
-      }
-      else {
-        sourceTr = $(tr).next();
-        orderModifier = i+1;
-      }
-      sum = parseSum(sourceTr);
-      setSum(tr, sum);
-      setOrder(tr, sum * 100 + orderModifier+1);
+    sourceTr = tr;
+    orderModifier = i-1;
+  }
+  else {
+    sourceTr = $(tr).next();
+    orderModifier = i+1;
+  }
+  
+  sum = parseSum(sourceTr);
+  setSum(tr, sum);
+  setOrder(tr, sum * 100 + orderModifier+1);
 }
 
-function sortTable(tbody) {
-
-  tbody
-    .find('tr')
-    .each(setSumAndOrder)
-    .sort((a, b) => getOrder(b) - getOrder(a))
-    .each((i, tr) => $(tr).appendTo(tbody))
-    .each((i, tr) => {
-      lastTr = $(tr).prev();
-      sum = getSum(tr);
-      lastSum = getSum(lastTr);
-      lastPosition = getPosition(lastTr);
+function setPosition(i, tr) {
+    
+  lastTr = $(tr).prev();
+    sum = getSum(tr);
+    lastSum = getSum(lastTr);
+    lastPosition = getPosition(lastTr);
+    
+    if (currentCompetition === LEAGUE || currentCompetition === ROUND) {
       
-      if (isMainCompetition || isPuttingRound) {
-        
+      if (sum == lastSum) {
+        position = lastPosition;
+      }
+      else {
+        position = i+1;
+      }
+    }
+    // currentCompetition === TOURNAMENT
+    else if (i%2 != 0) { // odd rows
+        position = lastPosition;
+    }
+    else { // even rows
         if (sum == lastSum) {
           position = lastPosition;
         }
         else {
-          position = i+1;
+          position = i/2+1;
         }
-      }
-      else if (i%2 == 0) { // odd rows
-          if (sum == lastSum) {
-            position = lastPosition;
-          }
-          else {
-            position = i/2+1;
-          }
-      }
-      else { // even rows
-          position = lastPosition;
-      }
-      if (DEBUG) {
-        console.log('tr', tr);
-        console.log('lastTr', lastTr[0]);
-        console.log('sum', sum);
-        console.log('lastSum', lastSum);
-        console.log('lastPosition', getPosition(lastTr));
-        console.log(`i: ${i}, position: ${position}`);
-        console.log('-----------------------------------------')
-      }
-      setPosition(tr, position);
-      if (isMainCompetition || isPuttingRound || i%2 == 0) {
-        $(tr).find('td:first()').text(position);
-      }
-    });
-}
+    }
+    if (DEBUG) {
+      console.log('tr', tr);
+      console.log('lastTr', lastTr[0]);
+      console.log('sum', sum);
+      console.log('lastSum', lastSum);
+      console.log('lastPosition', getPosition(lastTr));
+      console.log(`i: ${i}, position: ${position}`);
+      console.log('-----------------------------------------')
+    }
+    setPosition(tr, position);
+    if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 0) { // ONLY odd rows in TOURNAMENT competition
+      $(tr).find('td:first()').text(position);
+    }
+  }
 
 function hideFirstTable() {
   $('#id_results tbody:first()').hide();
@@ -126,7 +122,7 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 /* MAIN */
 var tbody;
 
-if (currentCompetition == LEAGUE) {
+if (currentCompetition === LEAGUE) {
   tbody = $('.data tbody:last()');
 }
 else {
@@ -139,10 +135,10 @@ else {
   removeColors(tbody);
   
   var uselessColumns;
-  if (currentCompetition == TOURNAMENT) {
+  if (currentCompetition === TOURNAMENT) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
   }
-  else if (currentCompetition == ROUND) {
+  else if (currentCompetition === ROUND) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
   }
   
@@ -150,6 +146,10 @@ else {
   hideColumns(thead, 'th', uselessColumns);
 }
 
-sortTable(tbody);
+tbody.find('tr')
+     .each(setSumAndOrder)
+     .sort((a, b) => getOrder(b) - getOrder(a))
+     .each((i, tr) => $(tr).appendTo(tbody))
+     .each(setPosition);
 
 console.log('10:41');
