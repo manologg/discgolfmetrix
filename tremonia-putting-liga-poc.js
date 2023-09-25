@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '13:26';
+var VERSION = '13:31';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -80,8 +80,8 @@ function setTdStationsSum(i, td) {
   var putts = Number($(td).text()) || 0;
   var scoreMultiplicator = stations[i+1];
   var score = putts * scoreMultiplicator;
-  $(td).setPutts(putts);
-  $(td).setScore(score);
+  setPutts(td, putts);
+  setScore(td, score);
   $(td).text(score);
   $(td).addClass('tpl-points');
   $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
@@ -89,7 +89,6 @@ function setTdStationsSum(i, td) {
     $(td).addClass('tpl-error');
   }
     
-  
   if (DEBUG) {
     console.log('td', td);
     console.log(`${i} => ${$(td).text()}: ${putts} * ${scoreMultiplicator} = ${score}`);
@@ -103,9 +102,12 @@ function setTrStationsSum(i, tr) {
 
   // EXPERIMENT!
   if ($(".main-title").text().includes('2. Spieltag')) {
-    $(tr).find('td')
-         .slice(stationsStart, stationsStart + Object.values(stations).length)
-         .each(setTdStationsSum);
+    allScores = $(tr).find('td')
+                     .slice(stationsStart, stationsStart + Object.values(stations).length)
+                     .each(setTdStationsSum)
+                     .map((i, td) => getScore(td));
+
+    Array.from(allScores).reduce((a, b) => a + b);
   }
 }
 
@@ -115,8 +117,6 @@ function setTrSumAndOrder(i, tr) {
   // this if-else is "duplicated"
   
   if ($(".main-title").text().includes('2. Spieltag')) {
-
-    
 
     if (currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
       sourceTr = tr;
