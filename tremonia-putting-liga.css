@@ -1,5 +1,12 @@
-.putts {
+.tpl-points {
+  position: relative;
+}
+
+.tpl-putts {
   font-size: smaller;
-  color: gray;
+  color: lightgray;
   font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
