@@ -65,7 +65,7 @@ function setTdStationsSum(i, td) {
   var score = putts * scoreMultiplicator;
   $(td).text(score);
   $(td).addClass('tpl-points');
-  $(td).append(`<span class="tpl-putts">${putts}</span>`)
+  $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
   
   if (DEBUG) {
     console.log('td', td);
