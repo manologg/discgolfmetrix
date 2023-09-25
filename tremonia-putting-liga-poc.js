@@ -105,6 +105,10 @@ function setTdSum(i, td) {
 
 }
 
+function displaySubSum(tr, sum) {
+  $(tr).find('td:nth-last-child(3)').text(sum);
+}
+
 var stationsStart;
 if (currentCompetition === ROUND) {
   stationsStart = 4;
@@ -122,10 +126,18 @@ function setTdSums(i, tr) {
                      .map((i, td) => getScore(td));
 
     var sum = Array.from(allScores).reduce((a, b) => a + b);
-    $(tr).find('td:nth-last-child(3)').text(sum);
+
+    if (currentCompetition === ROUND) {
+      displaySubSum(tr, sum);
+    }
     setSubSum(tr, sum);
   }
 }
+
+function displaySum(tr, sum) {
+  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
+    $(tr).find('td:last()').text(sum);
+  }
 
 function setTrSumAndOrder(i, tr) {
 
@@ -163,9 +175,7 @@ function setTrSumAndOrder(i, tr) {
     sum = parseSum(sourceTr);
   }
 
-  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
-    $(tr).find('td:last()').text(sum);
-  }
+  displaySum(tr, sum);
   setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
