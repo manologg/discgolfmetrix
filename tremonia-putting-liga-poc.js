@@ -110,9 +110,7 @@ function displaySubSum(tr, sum) {
 }
 
 function displaySum(tr, sum) {
-  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
-    $(tr).find('td:last()').text(sum);
-  }
+  $(tr).find('td:last()').text(sum);
 }
 
 var stationsStart;
@@ -176,7 +174,9 @@ function setTrSumAndOrder(i, tr) {
     sum = parseSum(sourceTr);
   }
 
-  displaySum(tr, sum);
+  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
+    displaySum(tr, sum);
+  }
   setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
