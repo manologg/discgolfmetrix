@@ -1,6 +1,7 @@
 var VERSION = '12:29';
 console.log(VERSION);
-var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+//var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+var DEBUG = true;
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
