@@ -1,12 +1,14 @@
-DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+var VERSION = '11:07';
+console.log(VERSION);
+var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
-const currentCompetition = $(".main-title").text().match(/→/g).length;
+var currentCompetition = $(".main-title").text().match(/→/g).length;
 
 // competition levels
-const LEAGUE = 0;
-const TOURNAMENT = 1;
-const ROUND = 2;
+var LEAGUE = 0;
+var TOURNAMENT = 1;
+var ROUND = 2;
 
 function parseSum(tr) {
   return Number($(tr).find('td:last()').text());
@@ -152,4 +154,4 @@ tbody.find('tr')
      .each((i, tr) => $(tr).appendTo(tbody))
      .each(setTrPosition);
 
-console.log('11:00');
+console.log(VERSION);
