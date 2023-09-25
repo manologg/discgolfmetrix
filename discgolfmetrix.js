@@ -49,6 +49,7 @@ function loadSubcompetitionButtons(onlyFuture) {
         type: "GET",
         url: "https://discgolfmetrix.com/api.php?content=result&id=" + document.URL.split('/').pop(),
         success: function(response) {
+            
             const today = new Date().toISOString().slice(0, 10);
             const sortNextTournaments = () => {
                 const allTournaments = $("#subcompetitions .button").sort((a, b) => $(a).data('date') > $(b).data('date') ? 1 : -1);
@@ -56,16 +57,8 @@ function loadSubcompetitionButtons(onlyFuture) {
                 allTournaments.each(function(){$("#subcompetitions").append(this.outerHTML)});
             };
             const childName = (competition) => competition.Name.split(" &rarr; ").pop();
-            if (response.Competition.Events) {
-                $(".main-header .main-title").after("<div id='subcompetitions'/>");
-            }
-            response.Competition.Events?.forEach(function(event){
-                $.ajax({
-                    type: "GET",
-                    url: "https://discgolfmetrix.com/api.php?content=result&id=" + event.ID,
-                    success: function(response) {
-                        const competition = response.Competition;
-                        if (!onlyFuture || competition.Date > today) {
+            const appendSubcompetition = (competition) => {
+                if (!onlyFuture || competition.Date > today) {
                             $("#subcompetitions").append(`<a
                                                                 class='button'
                                                                 href='https://discgolfmetrix.com/${competition.ID}'
@@ -75,8 +68,22 @@ function loadSubcompetitionButtons(onlyFuture) {
                                                         `);
                             sortNextTournaments();
                         }
+            };
+            
+            if (response.Competition.Events) {
+                $(".main-header .main-title").after("<div id='subcompetitions'/>");
+            }
+            response.Competition.Events?.forEach(function(event){
+                $.ajax({
+                    type: "GET",
+                    url: "https://discgolfmetrix.com/api.php?content=result&id=" + event.ID,
+                    success: function(response) {
+                        appendSubcompetition(response.Competition);
                     }
                 });
+            });
+            response.Competition.SubCompetitions?.forEach(function(subCompetition){
+                appendSubcompetition(subCompetition);
             });
         },
         error: function(response, e) {
