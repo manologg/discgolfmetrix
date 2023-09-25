@@ -11,6 +11,6 @@ span.tpl-putts {
   color: lightgray;
   font-weight: bold;
   position: absolute;
-  bottom: -2px;
+  bottom: 0px;
   right: 2px;
 }
