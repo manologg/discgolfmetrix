@@ -139,11 +139,6 @@ function setTrSumAndOrder(i, tr) {
   setOrder(tr, sum * 100 + orderModifier+1);
 }
 
-tbody.find('tr')
-     // EXPERIMENT!
-     .each(setTrStationsSum)
-     .each(setTrSumAndOrder)
-
 function setTrPosition(i, tr) {
     
   lastTr = $(tr).prev();
