@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '14:15';
+var VERSION = '15:32';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = false;
@@ -10,7 +10,7 @@ var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
 
 // competition levels
 var LEAGUE = 0;
-var TOURNAMENT = 1;
+var TOURNAMENT = 1;e
 var ROUND = 2;
 
 function loadCss() {
