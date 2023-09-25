@@ -75,7 +75,7 @@ function getPosition(tr) {
 
 var stations = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
 var MAX_PUTTS_PER_STATION = 3;
-function setTdStationsSum(i, td) {
+function setTdSum(i, td) {
 
   var putts = Number($(td).text()) || 0;
   var scoreMultiplicator = stations[i+1];
@@ -98,13 +98,13 @@ function setTdStationsSum(i, td) {
 }
 
 var stationsStart = 5;
-function setTrStationsSum(i, tr) {
+function setTdSums(i, tr) {
 
   // EXPERIMENT!
   if ($(".main-title").text().includes('2. Spieltag')) {
     allScores = $(tr).find('td')
                      .slice(stationsStart, stationsStart + Object.values(stations).length)
-                     .each(setTdStationsSum)
+                     .each(setTdSum)
                      .map((i, td) => getScore(td));
 
     Array.from(allScores).reduce((a, b) => a + b);
@@ -239,7 +239,7 @@ else {
 
 tbody.find('tr')
      // EXPERIMENT!
-     .each(setTrStationsSum)
+     .each(setTdSums)
      .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
      .each((i, tr) => $(tr).appendTo(tbody))
