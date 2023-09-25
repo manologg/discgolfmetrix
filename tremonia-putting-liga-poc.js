@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '12:42';
+var VERSION = '12:48';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -68,7 +68,7 @@ function setTdStationsSum(i, td) {
   
   if (DEBUG) {
     console.log('td', td);
-    console.log(`i: ${i}, ${putts} * ${scoreMultiplicator} = ${score}`);
+    console.log(`${i} => ${$(td).text()}: ${putts} * ${scoreMultiplicator} = ${score}`);
     console.log('-----------------------------------------')
   }
 
