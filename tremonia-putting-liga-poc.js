@@ -1,9 +1,11 @@
 DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
-function hideFirstTable() {
-  $('#id_results tbody:first()').hide();
-  $('#id_results thead:first()').hide();
-}
+// Sure, this breaks if you use arrows in the competition's name. Please DON'T
+const currentCompetition = $(".main-title").text().match(/→/g).length;
+// competition levels
+const LEAGUE = 0,
+const TOURNAMENT = 1;
+const ROUND = 2;
 
 function parseSum(tr) {
   return Number($(tr).find('td:last()').text());
@@ -103,10 +105,9 @@ function sortTable(tbody) {
     });
 }
 
-function hideColumns(trContainer, columnType, columnSelectors) {
-  columnSelectors.forEach(
-    selector => trContainer.find(`tr ${columnType}:${selector}`).hide()
-  );
+function hideFirstTable() {
+  $('#id_results tbody:first()').hide();
+  $('#id_results thead:first()').hide();
 }
 
 function removeColors(tdContainer) {
@@ -115,30 +116,35 @@ function removeColors(tdContainer) {
     .css('background-color', 'unset')
 }
 
-/* MAIN */
+function hideColumns(trContainer, columnType, columnSelectors) {
+  columnSelectors.forEach(
+    selector => trContainer.find(`tr ${columnType}:${selector}`).hide()
+  );
+}
 
-var isPuttingRound = $(".main-title").text().includes('Runde');
-var isMainCompetition = !$(".main-title").text().includes('→');
+/* MAIN */
 var tbody;
 
-if (isMainCompetition) {
+if (currentCompetition == LEAGUE) {
   tbody = $('.data tbody:last()');
 }
 else {
 
+  hideFirstTable();
+  
   var thead = $('#id_results thead:last()');
   tbody = $('#id_results tbody:last()');
+
+  removeColors(tbody);
+  
   var uselessColumns;
-  if (isPuttingRound) {
-    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
-  }
-  else {
+  if (currentCompetition == TOURNAMENT) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
   }
+  else if (currentCompetition == ROUND) {
+    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
+  }
   
-  removeColors(tbody);
-  hideFirstTable();
-
   hideColumns(tbody, 'td', uselessColumns);
   hideColumns(thead, 'th', uselessColumns);
 }
