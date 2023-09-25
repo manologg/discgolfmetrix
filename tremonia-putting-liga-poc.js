@@ -45,6 +45,32 @@ function getPosition(tr) {
   return $(tr).data('position');
 }
 
+var stations = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
+function setTdStationsSum(i, td) {
+
+  var putts = Number($(td).text());
+  var scoreMultiplicator = stations[i+1];
+  var score = putts * scoreMultiplicator;
+  $(td).text(score);
+  
+  if (DEBUG) {
+    console.log('td', td);
+    console.log(`i: ${i}, ${putts} * ${scoreMultiplicator} = ${score}`);
+    console.log('-----------------------------------------')
+  }
+
+}
+
+var stationsStart = 4;
+function setTrStationsSum(i, tr) {
+  
+  if ($(".main-title").text().includes('2. Spieltag')) {
+    $(tr).find('td')
+         .slice(stationsStart, stationsStart + Object.values(stations).length)
+         .each(setTdStationsSum);
+  }
+}
+
 function setTrSumAndOrder(i, tr) {
   
   if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
@@ -146,9 +172,14 @@ else {
   
   hideColumns(tbody, 'td', uselessColumns);
   hideColumns(thead, 'th', uselessColumns);
+
+  var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
+  uselessElements.forEach(selector => $(selector).hide());
 }
 
 tbody.find('tr')
+     // this is just an experiment!!!
+     .each(setTrStationsSum)
      .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
      .each((i, tr) => $(tr).appendTo(tbody))
