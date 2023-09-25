@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '12:48';
+var VERSION = '12:56';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -74,7 +74,7 @@ function setTdStationsSum(i, td) {
 
 }
 
-var stationsStart = 4;
+var stationsStart = 5;
 function setTrStationsSum(i, tr) {
   
   if ($(".main-title").text().includes('2. Spieltag')) {
