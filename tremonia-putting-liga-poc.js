@@ -45,7 +45,7 @@ function getPosition(tr) {
 
 function setSumAndOrder(i, tr) {
   
-  if (isMainCompetition || isPuttingRound || i%2 == 1) {
+  if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
     sourceTr = tr;
     orderModifier = i-1;
   }
@@ -76,10 +76,10 @@ function setPosition(i, tr) {
       }
     }
     // currentCompetition === TOURNAMENT
-    else if (i%2 != 0) { // odd rows
+    else if (i%2 == 1) { // even rows
         position = lastPosition;
     }
-    else { // even rows
+    else { // odd rows
         if (sum == lastSum) {
           position = lastPosition;
         }
@@ -152,4 +152,4 @@ tbody.find('tr')
      .each((i, tr) => $(tr).appendTo(tbody))
      .each(setPosition);
 
-console.log('10:41');
+console.log('11:00');
