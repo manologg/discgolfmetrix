@@ -1,12 +1,12 @@
-.tpl-points {
+td.tpl-points {
   position: relative;
 }
 
-.tpl-error {
-  background-color: red;
+td.tpl-error {
+  background-color: red !important;
 }
 
-.tpl-putts {
+span.tpl-putts {
   font-size: smaller;
   color: lightgray;
   font-weight: bold;
