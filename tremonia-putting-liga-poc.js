@@ -1,4 +1,6 @@
-var VERSION = '12:30';
+var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
+
+var VERSION = '12:38';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -10,6 +12,15 @@ var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
 var LEAGUE = 0;
 var TOURNAMENT = 1;
 var ROUND = 2;
+
+function loadCss() {
+  $.ajax({
+    url: `${REPO_BASE_URL}/tremonia-putting-licadiscgolfmetrix.css`,
+    success: function(response) {
+      $("head").append(`<style>${response}</style>`);
+    }
+  });
+}
 
 function parseSum(tr) {
   return Number($(tr).find('td:last()').text());
@@ -53,6 +64,7 @@ function setTdStationsSum(i, td) {
   var scoreMultiplicator = stations[i+1];
   var score = putts * scoreMultiplicator;
   $(td).text(score);
+  $(td).append(`<span>${putts}</span>`)
   
   if (DEBUG) {
     console.log('td', td);
