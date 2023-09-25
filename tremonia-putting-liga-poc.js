@@ -43,7 +43,7 @@ function getPosition(tr) {
   return $(tr).data('position');
 }
 
-function setSumAndOrder(i, tr) {
+function setTrSumAndOrder(i, tr) {
   
   if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
     sourceTr = tr;
@@ -59,7 +59,7 @@ function setSumAndOrder(i, tr) {
   setOrder(tr, sum * 100 + orderModifier+1);
 }
 
-function setPosition(i, tr) {
+function setTrPosition(i, tr) {
     
   lastTr = $(tr).prev();
     sum = getSum(tr);
@@ -147,9 +147,9 @@ else {
 }
 
 tbody.find('tr')
-     .each(setSumAndOrder)
+     .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
      .each((i, tr) => $(tr).appendTo(tbody))
-     .each(setPosition);
+     .each(setTrPosition);
 
 console.log('11:00');
