@@ -271,4 +271,4 @@ tbody.find('tr')
      .each((i, tr) => $(tr).appendTo(tbody))
      .each(setTrPosition);
 
-alert(VERSION);
+console.log(VERSION);
