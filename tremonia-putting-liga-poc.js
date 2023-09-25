@@ -1,6 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '13:00';
+var VERSION = '13:26';
 console.log(VERSION);
 //var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 var DEBUG = true;
@@ -33,6 +33,22 @@ function setData(tr, key, value) {
   }
 }
 
+function setPutts(td, putts) {
+  setData(tr, 'putts', putts)
+}
+
+function getPutts(td) {
+  return $(tr).data('putts');
+}
+
+function setScore(td, points) {
+  setData(tr, 'score', points)
+}
+
+function getScore(td) {
+  return $(tr).data('score');
+}
+
 function setSum(tr, sum) {
   setData(tr, 'sum', sum)
 }
@@ -63,6 +79,8 @@ function setTdStationsSum(i, td) {
   var putts = Number($(td).text()) || 0;
   var scoreMultiplicator = stations[i+1];
   var score = putts * scoreMultiplicator;
+  $(td).setPutts(putts);
+  $(td).setScore(score);
   $(td).text(score);
   $(td).addClass('tpl-points');
   $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
@@ -77,7 +95,8 @@ function setTdStationsSum(i, td) {
 
 var stationsStart = 5;
 function setTrStationsSum(i, tr) {
-  
+
+  // EXPERIMENT!
   if ($(".main-title").text().includes('2. Spieltag')) {
     $(tr).find('td')
          .slice(stationsStart, stationsStart + Object.values(stations).length)
@@ -86,20 +105,44 @@ function setTrStationsSum(i, tr) {
 }
 
 function setTrSumAndOrder(i, tr) {
+
+  // EXPERIMENT!
+  // this if-else is "duplicated"
   
-  if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
-    sourceTr = tr;
-    orderModifier = i-1;
+  if ($(".main-title").text().includes('2. Spieltag')) {
+
+    
+
+    if (currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
+      sourceTr = tr;
+      orderModifier = i-1;
+    }
+    else {
+      sourceTr = $(tr).next();
+      orderModifier = i+1;
+    }
+    
   }
   else {
-    sourceTr = $(tr).next();
-    orderModifier = i+1;
+    if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
+      sourceTr = tr;
+      orderModifier = i-1;
+    }
+    else {
+      sourceTr = $(tr).next();
+      orderModifier = i+1;
+    }
   }
   
   sum = parseSum(sourceTr);
   setSum(tr, sum);
   setOrder(tr, sum * 100 + orderModifier+1);
 }
+
+tbody.find('tr')
+     // EXPERIMENT!
+     .each(setTrStationsSum)
+     .each(setTrSumAndOrder)
 
 function setTrPosition(i, tr) {
     
@@ -195,7 +238,7 @@ else {
 }
 
 tbody.find('tr')
-     // this is just an experiment!!!
+     // EXPERIMENT!
      .each(setTrStationsSum)
      .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
