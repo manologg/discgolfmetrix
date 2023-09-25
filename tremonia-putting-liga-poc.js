@@ -97,7 +97,13 @@ function setTdSum(i, td) {
 
 }
 
-var stationsStart = 5;
+var stationsStart;
+if (currentCompetition === ROUND) {
+  stationsStart = 4;
+}
+else if (currentCompetition === TOURNAMENT) {
+  stationsStart = 5;
+}
 function setTdSums(i, tr) {
 
   // EXPERIMENT!
@@ -107,7 +113,8 @@ function setTdSums(i, tr) {
                      .each(setTdSum)
                      .map((i, td) => getScore(td));
 
-    Array.from(allScores).reduce((a, b) => a + b);
+    var sum = Array.from(allScores).reduce((a, b) => a + b);
+    
   }
 }
 
