@@ -34,7 +34,7 @@ else {
 
 function loadCss() {
   $.ajax({
-    url: `${REPO_BASE_URL}/tremonia-putting-liga.css`,
+    url: `${REPO_BASE_URL}/putting-league.css`,
     success: function(response) {
       $("head").append(`<style>${response}</style>`);
     }
