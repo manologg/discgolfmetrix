@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '13:37';
+var VERSION = '13:44';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -83,7 +83,7 @@ function setTdSum(i, td) {
   var score = putts * scoreMultiplicator;
   if (putts == MAX_PUTTS_PER_STATION) {
     score = score + 1;
-    $(td).addClass('tpl-ace');
+    $(td).addClass('tpl-ace').css('background-color', '#ffb400');
   }
   setData(td, 'putts', putts)
   setData(td, 'score', score);
