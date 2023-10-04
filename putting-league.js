@@ -136,7 +136,7 @@ var stationsStart;
 if (currentCompetition === ROUND) {
   stationsStart = 4;
 }
-else if (currentCompetition === TOURNAMENT) {
+else if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
   stationsStart = 5;
 }
 function setTdSums(i, tr) {
@@ -157,7 +157,7 @@ function setTdSums(i, tr) {
 
 function setTrSumAndOrder(i, tr) {
   
-  if (currentCompetition === ROUND) {
+  if (currentCompetition === ROUND || currentCompetition === LEAGUE) {
     sum = getSubSum(tr);
     orderModifier = i-1;
   }
@@ -257,7 +257,7 @@ else {
   removeColors(tbody);
   
   var uselessColumns;
-  if (currentCompetition === TOURNAMENT) {
+  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
   }
   else if (currentCompetition === ROUND) {
