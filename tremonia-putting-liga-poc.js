@@ -1,5 +1,6 @@
-var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
+/* CONSTANTS */
 
+var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 var VERSION = '11:12';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
@@ -11,6 +12,19 @@ var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
 var LEAGUE = 0;
 var TOURNAMENT = 1;
 var ROUND = 2;
+
+/* THESE COULD BE DEFINED IN METRIX */
+
+if (typeof PUTTING_STATIONS === "undefined") {
+  PUTTING_STATIONS = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1};
+  DEFAULT_POINTS = true;
+}
+else {
+  DEFAULT_POINTS = false;
+}
+if (typeof MAX_PUTTS_PER_STATION === "undefined") {
+  MAX_PUTTS_PER_STATION = 3;
+}
 
 function loadCss() {
   $.ajax({
@@ -89,7 +103,9 @@ function setTdSum(i, td) {
   setScore(td, score);
   $(td).text(score);
   $(td).addClass('tpl-points');
-  $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
+  if (!DEFAULT_POINTS) {
+    $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
+  }
   if (putts > MAX_PUTTS_PER_STATION) {
     $(td).addClass('tpl-error');
   }
@@ -120,7 +136,7 @@ else if (currentCompetition === TOURNAMENT) {
 function setTdSums(i, tr) {
 
   allScores = $(tr).find('td')
-                   .slice(stationsStart, stationsStart + Object.values(stations).length)
+                   .slice(stationsStart, stationsStart + Object.values(PUTTING_STATIONS).length)
                    .each(setTdSum)
                    .map((i, td) => getScore(td));
 
@@ -217,13 +233,6 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 }
 
 /* MAIN */
-
-if (typeof PUTTING_STATIONS === "undefined") {
-  PUTTING_STATIONS = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5};
-}
-if (typeof MAX_PUTTS_PER_STATION === "undefined") {
-  MAX_PUTTS_PER_STATION = 3;
-}
 
 loadCss();
 
