@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '12:21';
+var VERSION = '13:19';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -127,7 +127,7 @@ function setTdSums(i, tr) {
   if (currentCompetition === TOURNAMENT) {
     displaySubSum(tr, sum);
   }
-  setData(tr, 'subSum', subSum);
+  setData(tr, 'subSum', sum);
 
 }
 
