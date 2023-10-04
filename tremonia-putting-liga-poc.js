@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '11:19';
+var VERSION = '11:23';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -15,15 +15,21 @@ var ROUND = 2;
 
 /* THESE COULD BE DEFINED IN METRIX */
 
-if (typeof PUTTING_STATIONS === "undefined") {
-  PUTTING_STATIONS = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1};
+if (typeof POINT_SYSTEM === "undefined") {
+  POINT_SYSTEM = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1};
   DEFAULT_POINTS = true;
+  console.log("Using DEFAULT point system:", POINT_SYSTEM);
 }
 else {
   DEFAULT_POINTS = false;
+  console.log("Using point system:", POINT_SYSTEM);
 }
 if (typeof MAX_PUTTS_PER_STATION === "undefined") {
   MAX_PUTTS_PER_STATION = 3;
+  console.log("Only 3 putts per station allowed (DEFAULT)");
+}
+else {
+  console.log(`Only ${MAX_PUTTS_PER_STATION} putts per station allowed`);
 }
 
 function loadCss() {
@@ -97,7 +103,7 @@ function getPosition(tr) {
 function setTdSum(i, td) {
 
   var putts = Number($(td).text()) || 0;
-  var scoreMultiplicator = PUTTING_STATIONS[i+1];
+  var scoreMultiplicator = POINT_SYSTEM[i+1];
   var score = putts * scoreMultiplicator;
   setPutts(td, putts);
   setScore(td, score);
@@ -136,7 +142,7 @@ else if (currentCompetition === TOURNAMENT) {
 function setTdSums(i, tr) {
 
   allScores = $(tr).find('td')
-                   .slice(stationsStart, stationsStart + Object.values(PUTTING_STATIONS).length)
+                   .slice(stationsStart, stationsStart + Object.values(POINT_SYSTEM).length)
                    .each(setTdSum)
                    .map((i, td) => getScore(td));
 
