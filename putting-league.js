@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '11:28';
+var VERSION = '11:46';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -242,34 +242,26 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 
 loadCss();
 
-var tbody;
+hideFirstTable();
 
-if (currentCompetition === LEAGUE) {
-  tbody = $('.data tbody:last()');
+var thead = $('#id_results thead:last()');
+var tbody = $('#id_results tbody:last()');
+
+removeColors(tbody);
+
+var uselessColumns;
+if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
+  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
 }
-else {
-
-  hideFirstTable();
-  
-  var thead = $('#id_results thead:last()');
-  tbody = $('#id_results tbody:last()');
-
-  removeColors(tbody);
-  
-  var uselessColumns;
-  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
-    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
-  }
-  else if (currentCompetition === ROUND) {
-    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
-  }
-  
-  hideColumns(tbody, 'td', uselessColumns);
-  hideColumns(thead, 'th', uselessColumns);
-
-  var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
-  uselessElements.forEach(selector => $(selector).hide());
+else if (currentCompetition === ROUND) {
+  uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
 }
+
+hideColumns(tbody, 'td', uselessColumns);
+hideColumns(thead, 'th', uselessColumns);
+
+var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
+uselessElements.forEach(selector => $(selector).hide());
 
 tbody.find('tr')
      .each(setTdSums)
