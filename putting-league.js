@@ -81,6 +81,10 @@ function setTdSum(i, td) {
   var putts = Number($(td).text()) || 0;
   var scoreMultiplicator = POINT_SYSTEM[i+1];
   var score = putts * scoreMultiplicator;
+  if (putts == MAX_PUTTS_PER_STATION) {
+    score = score + 1;
+    $(td).addClass('tpl-ace');
+  }
   setData(td, 'putts', putts)
   setData(td, 'score', score);
   $(td).text(score);
