@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '11:46';
+var VERSION = '11:52';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -52,48 +52,24 @@ function setData(tr, key, value) {
   }
 }
 
-function setPutts(td, putts) {
-  setData(td, 'putts', putts)
-}
-
 function getPutts(td) {
   return $(td).data('putts');
-}
-
-function setScore(td, points) {
-  setData(td, 'score', points)
 }
 
 function getScore(td) {
   return $(td).data('score');
 }
 
-function setSubSum(tr, subSum) {
-  setData(tr, 'subSum', subSum)
-}
-
 function getSubSum(tr) {
   return $(tr).data('subSum');
-}
-
-function setSum(tr, sum) {
-  setData(tr, 'sum', sum)
 }
 
 function getSum(tr) {
   return $(tr).data('sum');
 }
 
-function setOrder(tr, order) {
-  setData(tr, 'order', order);
-}
-
 function getOrder(tr) {
   return $(tr).data('order');
-}
-
-function setPosition(tr, position) {
-  setData(tr, 'position', position);
 }
 
 function getPosition(tr) {
@@ -105,8 +81,8 @@ function setTdSum(i, td) {
   var putts = Number($(td).text()) || 0;
   var scoreMultiplicator = POINT_SYSTEM[i+1];
   var score = putts * scoreMultiplicator;
-  setPutts(td, putts);
-  setScore(td, score);
+  setData(td, 'putts', putts)
+  setData(td, 'score', points);
   $(td).text(score);
   $(td).addClass('tpl-points');
   if (!DEFAULT_POINTS) {
@@ -151,7 +127,7 @@ function setTdSums(i, tr) {
   if (currentCompetition === TOURNAMENT) {
     displaySubSum(tr, sum);
   }
-  setSubSum(tr, sum);
+  setData(tr, 'subSum', subSum);
 
 }
 
@@ -174,8 +150,8 @@ function setTrSumAndOrder(i, tr) {
   if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
     displaySum(tr, sum);
   }
-  setSum(tr, sum);
-  setOrder(tr, sum * 100 + orderModifier+1);
+  setData(tr, 'sum', sum);
+  setData(tr, 'order', sum * 100 + orderModifier+1);
 }
 
 function setTrPosition(i, tr) {
@@ -215,7 +191,7 @@ function setTrPosition(i, tr) {
       console.log(`i: ${i}, position: ${position}`);
       console.log('-----------------------------------------')
     }
-    setPosition(tr, position);
+    setData(tr, 'position', position);
     if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 0) { // ONLY odd rows in TOURNAMENT competition
       $(tr).find('td:first()').text(position);
     }
