@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '13:19';
+var VERSION = '13:37';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -214,6 +214,10 @@ function hideColumns(trContainer, columnType, columnSelectors) {
   );
 }
 
+function displayThPoints(i, th) {
+    $(th).text(`${$(th).text()} (${POINT_SYSTEM[i+1]}P)`)
+}
+
 /* MAIN */
 
 loadCss();
@@ -238,6 +242,10 @@ hideColumns(thead, 'th', uselessColumns);
 
 var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
 uselessElements.forEach(selector => $(selector).hide());
+
+thead.find('th')
+     .slice(stationsStart, stationsStart + Object.values(POINT_SYSTEM).length)
+     .each(displayThPoints)
 
 tbody.find('tr')
      .each(setTdSums)
