@@ -1,9 +1,8 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 
-var VERSION = '16:20';
+var VERSION = '11:12';
 console.log(VERSION);
-//var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
-var DEBUG = false;
+var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
@@ -81,12 +80,10 @@ function getPosition(tr) {
   return $(tr).data('position');
 }
 
-var stations = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}
-var MAX_PUTTS_PER_STATION = 3;
 function setTdSum(i, td) {
 
   var putts = Number($(td).text()) || 0;
-  var scoreMultiplicator = stations[i+1];
+  var scoreMultiplicator = PUTTING_STATIONS[i+1];
   var score = putts * scoreMultiplicator;
   setPutts(td, putts);
   setScore(td, score);
@@ -122,56 +119,34 @@ else if (currentCompetition === TOURNAMENT) {
 }
 function setTdSums(i, tr) {
 
-  // EXPERIMENT!
-  if ($(".main-title").text().includes('2. Spieltag')) {
-    allScores = $(tr).find('td')
-                     .slice(stationsStart, stationsStart + Object.values(stations).length)
-                     .each(setTdSum)
-                     .map((i, td) => getScore(td));
+  allScores = $(tr).find('td')
+                   .slice(stationsStart, stationsStart + Object.values(stations).length)
+                   .each(setTdSum)
+                   .map((i, td) => getScore(td));
 
-    var sum = Array.from(allScores).reduce((a, b) => a + b);
+  var sum = Array.from(allScores).reduce((a, b) => a + b);
 
-    if (currentCompetition === TOURNAMENT) {
-      displaySubSum(tr, sum);
-    }
-    setSubSum(tr, sum);
+  if (currentCompetition === TOURNAMENT) {
+    displaySubSum(tr, sum);
   }
+  setSubSum(tr, sum);
+
 }
 
 function setTrSumAndOrder(i, tr) {
-
-  // EXPERIMENT!
-  // this if-else is "duplicated"
   
-  if ($(".main-title").text().includes('2. Spieltag')) {
-
-    if (currentCompetition === ROUND) {
-      sum = getSubSum(tr);
-      orderModifier = i-1;
-    }
-    // currentCompetition === TOURNAMENT
-    else if (i%2 == 1) { // even rows
-      sum = getSubSum($(tr).prev()) + getSubSum(tr);
-      orderModifier = i-1;
-    }
-    else { // odd rows
-      sum = getSubSum(tr) + getSubSum($(tr).next());
-      orderModifier = i+1;
-    }
-    
+  if (currentCompetition === ROUND) {
+    sum = getSubSum(tr);
+    orderModifier = i-1;
   }
-  else {
-    
-    if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 1) { // ONLY even rows in TOURNAMENT competition
-      sourceTr = tr;
-      orderModifier = i-1;
-    }
-    else {
-      sourceTr = $(tr).next();
-      orderModifier = i+1;
-    }
-    
-    sum = parseSum(sourceTr);
+  // currentCompetition === TOURNAMENT
+  else if (i%2 == 1) { // even rows
+    sum = getSubSum($(tr).prev()) + getSubSum(tr);
+    orderModifier = i-1;
+  }
+  else { // odd rows
+    sum = getSubSum(tr) + getSubSum($(tr).next());
+    orderModifier = i+1;
   }
 
   if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
@@ -243,6 +218,13 @@ function hideColumns(trContainer, columnType, columnSelectors) {
 
 /* MAIN */
 
+if (typeof PUTTING_STATIONS === "undefined") {
+  PUTTING_STATIONS = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5};
+}
+if (typeof MAX_PUTTS_PER_STATION === "undefined") {
+  MAX_PUTTS_PER_STATION = 3;
+}
+
 loadCss();
 
 var tbody;
@@ -275,7 +257,6 @@ else {
 }
 
 tbody.find('tr')
-     // EXPERIMENT!
      .each(setTdSums)
      .each(setTrSumAndOrder)
      .sort((a, b) => getOrder(b) - getOrder(a))
