@@ -1,7 +1,7 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '11:52';
+var VERSION = '12:21';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -82,7 +82,7 @@ function setTdSum(i, td) {
   var scoreMultiplicator = POINT_SYSTEM[i+1];
   var score = putts * scoreMultiplicator;
   setData(td, 'putts', putts)
-  setData(td, 'score', points);
+  setData(td, 'score', score);
   $(td).text(score);
   $(td).addClass('tpl-points');
   if (!DEFAULT_POINTS) {
