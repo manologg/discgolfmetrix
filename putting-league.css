@@ -2,6 +2,11 @@
   overflow: scroll;
 }
 
+#content tbody td.player-cell {
+    max-width: 10rem;
+    white-space: pre-line;
+}
+
 td.tpl-points {
   position: relative;
 }
