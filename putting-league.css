@@ -1,3 +1,7 @@
+#content > .row {
+  overflow: scroll;
+}
+
 td.tpl-points {
   position: relative;
 }
