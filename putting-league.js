@@ -1,9 +1,9 @@
 /* CONSTANTS */
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '13:48';
+var VERSION = '09:53';
 console.log(VERSION);
-var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+var DEBUG = true; //(typeof DEBUG !== "undefined") && DEBUG
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
@@ -13,23 +13,32 @@ var LEAGUE = 0;
 var TOURNAMENT = 1;
 var ROUND = 2;
 
-/* THESE COULD BE DEFINED IN METRIX */
+/* THESE CAN BE DEFINED IN METRIX */
 
-if (typeof POINT_SYSTEM === "undefined") {
+if (typeof POINT_SYSTEM === 'undefined') {
   POINT_SYSTEM = {1: 1, 2: 1, 3: 1, 4: 1, 5: 1};
   DEFAULT_POINTS = true;
-  console.log("Using DEFAULT point system:", POINT_SYSTEM);
+  console.log('Using DEFAULT point system:', POINT_SYSTEM);
 }
 else {
   DEFAULT_POINTS = false;
-  console.log("Using point system:", POINT_SYSTEM);
+  console.log('Using point system:', POINT_SYSTEM);
 }
-if (typeof MAX_PUTTS_PER_STATION === "undefined") {
+
+if (typeof MAX_PUTTS_PER_STATION === 'undefined') {
   MAX_PUTTS_PER_STATION = 3;
-  console.log("Only 3 putts per station allowed (DEFAULT)");
+  console.log('Only 3 putts per station allowed (DEFAULT)');
 }
 else {
   console.log(`Only ${MAX_PUTTS_PER_STATION} putts per station allowed`);
+}
+
+if (typeof EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE === "undefined") {
+  EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE = 0;
+  console.log('No extra points if all putts from one station are made (DEFAULT)');
+}
+else {
+  console.log(`If all putts from one station are made the player gets ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} extra points (DEFAULT)`);
 }
 
 function loadCss() {
@@ -82,7 +91,7 @@ function setTdSum(i, td) {
   var scoreMultiplicator = POINT_SYSTEM[i+1];
   var score = putts * scoreMultiplicator;
   if (putts == MAX_PUTTS_PER_STATION) {
-    score = score + 1;
+    score = score + EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE;
     $(td).addClass('tpl-ace').css('background-color', '#ffb400');
   }
   setData(td, 'putts', putts)
@@ -98,7 +107,7 @@ function setTdSum(i, td) {
     
   if (DEBUG) {
     console.log('td', td);
-    console.log(`${i} => ${$(td).text()}: ${putts} * ${scoreMultiplicator} = ${score}`);
+    console.log(`${i} => ${$(td).text()}: ${putts} * ${scoreMultiplicator} + ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} = ${score}`);
     console.log('-----------------------------------------')
   }
 
