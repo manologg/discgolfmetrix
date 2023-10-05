@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '10:12';
+var VERSION = '10:22';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -67,6 +67,7 @@ function setData(tr, key, value) {
   $(tr).data(key, value);
   if (DEBUG) {
     $(tr).find('td:nth-child(2)').text(`${$(tr).find('td:nth-child(2)').text()}, ${key}: ${value}`);
+    console.log(`Setting ${key} to ${value}`);
   }
 }
 
@@ -146,7 +147,7 @@ function setTdSums(i, tr) {
 
   var sum = Array.from(allScores).reduce((a, b) => a + b);
 
-  if (currentCompetition === TOURNAMENT) {
+  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
     displaySubSum(tr, sum);
   }
   setData(tr, 'subSum', sum);
@@ -155,11 +156,11 @@ function setTdSums(i, tr) {
 
 function setTrSumAndOrder(i, tr) {
   
-  if (currentCompetition === ROUND || currentCompetition === LEAGUE) {
+  if (currentCompetition === ROUND) {
     sum = getSubSum(tr);
     orderModifier = i-1;
   }
-  // currentCompetition === TOURNAMENT
+  // currentCompetition === TOURNAMENT  || currentCompetition === LEAGUE
   else if (i%2 == 1) { // even rows
     sum = getSubSum($(tr).prev()) + getSubSum(tr);
     orderModifier = i-1;
@@ -169,7 +170,7 @@ function setTrSumAndOrder(i, tr) {
     orderModifier = i+1;
   }
 
-  if (currentCompetition === ROUND || (currentCompetition === TOURNAMENT && i%2 == 1)) {
+  if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i%2 == 1)) {
     displaySum(tr, sum);
   }
   setData(tr, 'sum', sum);
@@ -183,7 +184,7 @@ function setTrPosition(i, tr) {
   lastSum = getSum(lastTr);
   lastPosition = getPosition(lastTr);
   
-  if (currentCompetition === LEAGUE || currentCompetition === ROUND) {
+  if (currentCompetition === ROUND) {
     
     if (sum == lastSum) {
       position = lastPosition;
@@ -192,7 +193,7 @@ function setTrPosition(i, tr) {
       position = i+1;
     }
   }
-  // currentCompetition === TOURNAMENT
+  // currentCompetition === TOURNAMENT || currentCompetition === LEAGUE
   else if (i%2 == 1) { // even rows
       position = lastPosition;
   }
@@ -214,7 +215,7 @@ function setTrPosition(i, tr) {
     console.log('-----------------------------------------')
   }
   setData(tr, 'position', position);
-  if (currentCompetition === LEAGUE || currentCompetition === ROUND || i%2 == 0) { // ONLY odd rows in TOURNAMENT competition
+  if (currentCompetition === ROUND || i%2 == 0) { // ONLY odd rows in TOURNAMENT and LEAGUE competition
     $(tr).find('td:first()').text(position);
   }
 }
