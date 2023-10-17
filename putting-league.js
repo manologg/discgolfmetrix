@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '22:50';
+var VERSION = '23:05';
 console.log(VERSION);
 var DEBUG = true; //(typeof DEBUG !== "undefined") && DEBUG
 
@@ -186,10 +186,14 @@ function setTrSumAndOrder(i, tr) {
     orderModifier = 0;
   }
   else { // currentCompetition === TOURNAMENT  || currentCompetition === LEAGUE
+    
     var amountOfPrevRounds = calculateAmountOfPrevRounds(AMOUNT_OF_ROUNDS, i);
     var amountOfNextRounds = calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i);
     sum = getPrevSubSums(tr, amountOfPrevRounds) + getSubSum(tr) + getNextSubSums(tr, amountOfNextRounds);
-    orderModifier = AMOUNT_OF_ROUNDS - 1 - i % AMOUNT_OF_ROUNDS;
+    
+    var innerIndex = i % AMOUNT_OF_ROUNDS;
+    var revInnerIndex = AMOUNT_OF_ROUNDS - 1 - i % AMOUNT_OF_ROUNDS;
+    orderModifier = i - innerIndex + revInnerIndex;
   }
 
   if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
