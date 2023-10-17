@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '23:05';
+var VERSION = '23:11';
 console.log(VERSION);
 var DEBUG = true; //(typeof DEBUG !== "undefined") && DEBUG
 
@@ -200,10 +200,9 @@ function setTrSumAndOrder(i, tr) {
     displaySum(tr, sum);
   }
   setData(tr, 'sum', sum);
-  setData(tr, 'order', sum * 1000 + orderModifier);
+  setData(tr, 'order', sum * 100 + orderModifier);
 }
 
-// TODO: fix this!
 function setTrPosition(i, tr) {
     
   lastTr = $(tr).prev();
@@ -221,16 +220,16 @@ function setTrPosition(i, tr) {
     }
   }
   // currentCompetition === TOURNAMENT || currentCompetition === LEAGUE
-  else if (i%2 == 1) { // even rows
-      position = lastPosition;
-  }
-  else { // odd rows
+  else if (i % AMOUNT_OF_ROUNDS == 0) { // first row with name
       if (sum == lastSum) {
         position = lastPosition;
       }
       else {
-        position = i/2+1;
+        position = i / AMOUNT_OF_ROUNDS + 1;
       }
+  }
+  else { // other rows
+      position = lastPosition;
   }
   if (DEBUG) {
     console.log('tr', tr);
@@ -242,7 +241,7 @@ function setTrPosition(i, tr) {
     console.log('-----------------------------------------')
   }
   setData(tr, 'position', position);
-  if (currentCompetition === ROUND || i%2 == 0) { // ONLY odd rows in TOURNAMENT and LEAGUE competition
+  if (currentCompetition === ROUND || i % AMOUNT_OF_ROUNDS == 0) { // ONLY first rows in TOURNAMENT and LEAGUE competition
     $(tr).find('td:first()').text(position);
   }
 }
