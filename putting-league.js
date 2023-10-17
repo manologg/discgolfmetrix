@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '22:02';
+var VERSION = '22:42';
 console.log(VERSION);
 var DEBUG = true; //(typeof DEBUG !== "undefined") && DEBUG
 
@@ -154,29 +154,52 @@ function setTdSums(i, tr) {
 
 }
 
+function getPrevSubSums(tr, amountOfRounds) {
+  if (amountOfRounds <= 0) {
+    return 0;
+  }
+  var prev = $(tr).prev();
+  return getPrevSubSums(prev, amountOfRounds - 1) + getSubSum(prev);
+}
+
+function getNextSubSums(tr, amountOfRounds) {
+  if (amountOfRounds <= 0) {
+    return 0;
+  }
+  var next = $(tr).next();
+  return getNextSubSums(next, amountOfRounds - 1) + getSubSum(next);
+}
+
+function calculateAmountOfPrevRounds(AMOUNT_OF_ROUNDS, i) {
+  return i % AMOUNT_OF_ROUNDS;
+}
+
+function calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i) {
+  return AMOUNT_OF_ROUNDS - 1 - i % AMOUNT_OF_ROUNDS;
+}
+
+AMOUNT_OF_ROUNDS = 4;
 function setTrSumAndOrder(i, tr) {
   
   if (currentCompetition === ROUND) {
     sum = getSubSum(tr);
-    orderModifier = i-1;
+    orderModifier = 0;
   }
-  // currentCompetition === TOURNAMENT  || currentCompetition === LEAGUE
-  else if (i%2 == 1) { // even rows
-    sum = getSubSum($(tr).prev()) + getSubSum(tr);
-    orderModifier = i-1;
-  }
-  else { // odd rows
-    sum = getSubSum(tr) + getSubSum($(tr).next());
-    orderModifier = i+1;
+  else { // currentCompetition === TOURNAMENT  || currentCompetition === LEAGUE
+    var amountOfPrevRounds = calculateAmountOfPrevRounds(AMOUNT_OF_ROUNDS, i);
+    var amountOfNextRounds = calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i);
+    sum = getPrevSubSums(tr, amountOfPrevRounds) + getSubSum(tr) + getNextSubSums(tr, amountOfNextRounds);
+    orderModifier = i % AMOUNT_OF_ROUNDS;
   }
 
-  if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i%2 == 1)) {
+  if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
     displaySum(tr, sum);
   }
   setData(tr, 'sum', sum);
-  setData(tr, 'order', sum * 100 + orderModifier+1);
+  setData(tr, 'order', sum * 1000 + orderModifier);
 }
 
+// TODO: fix this!
 function setTrPosition(i, tr) {
     
   lastTr = $(tr).prev();
