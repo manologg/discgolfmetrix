@@ -40,7 +40,8 @@ font {
 .button,
 .button.hollow:hover,
 .button.hollow.alert:hover,
-#competition-submenu .button:hover {
+#competition-submenu .button:hover,
+#competition-filter-wrapper .button:hover {
     background-color: #8d1950;
 }
 
