@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '17:57';
+var VERSION = '18:00';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -16,8 +16,10 @@ if (categoryHeader !== null) {
     var AMOUNT_OF_ROUNDS = 0;
     console.log('No rounds yet!');
   }
-  var AMOUNT_OF_ROUNDS = amountOfTotalRounds / amountOfPlayers;
-  console.log(`There are ${amountOfPlayers} players and ${amountOfTotalRounds} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
+  else {
+    var AMOUNT_OF_ROUNDS = amountOfTotalRounds / amountOfPlayers;
+    console.log(`There are ${amountOfPlayers} players and ${amountOfTotalRounds} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
+  }
 }
 else {
   var AMOUNT_OF_ROUNDS = 0;
