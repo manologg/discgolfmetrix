@@ -1,16 +1,24 @@
 /***** CONSTANTS *****/
 
-var THEAD = $('#id_results thead:last()');
-var TBODY = $('#id_results tbody:last()');
-var AMOUNT_OF_PLAYERS = Number(THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/)[0]);
-var AMOUNT_OF_TOTAL_ROUNDS = TBODY.find('tr').length;
-var AMOUNT_OF_ROUNDS = AMOUNT_OF_TOTAL_ROUNDS / AMOUNT_OF_PLAYERS;
-console.log(`There are ${AMOUNT_OF_PLAYERS} players and ${AMOUNT_OF_TOTAL_ROUNDS} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
-
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '16:34';
+var VERSION = '17:22';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+
+// things needed for calculating stuff in the results table
+var THEAD = $('#id_results thead:last()');
+var TBODY = $('#id_results tbody:last()');
+var categoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/);
+if (categoryHeader.lenth > 0) {
+  var amountOfPlayers = Number(categoryHeader[0]);
+  var amountOfTotalRounds = TBODY.find('tr').length;
+  var AMOUNT_OF_ROUNDS = amountOfTotalRounds / amountOfPlayers;
+  console.log(`There are ${amountOfPlayers} players and ${amountOfTotalRounds} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
+}
+else {
+  var AMOUNT_OF_ROUNDS = 0;
+  console.log('No players yet!');
+}
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
