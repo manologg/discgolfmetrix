@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '18:00';
+var VERSION = '18:06';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -304,27 +304,27 @@ function customizeResultsTable() {
   
   var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
   uselessElements.forEach(selector => $(selector).hide());
-  
+
   if (!DEFAULT_POINTS) {
     THEAD.find('th')
          .slice(stationsStart, stationsStart + Object.values(POINT_SYSTEM).length)
          .each(displayThPoints);
   }
-  
-  TBODY.find('tr')
-       .each(setTdSums)
-       .each(setTrSumAndOrder)
-       .sort((a, b) => getOrder(b) - getOrder(a))
-       .each((i, tr) => $(tr).appendTo(TBODY))
-       .each(setTrPosition);
+
+  if (AMOUNT_OF_ROUNDS > 0) {
+    TBODY.find('tr')
+         .each(setTdSums)
+         .each(setTrSumAndOrder)
+         .sort((a, b) => getOrder(b) - getOrder(a))
+         .each((i, tr) => $(tr).appendTo(TBODY))
+         .each(setTrPosition);
+  }
 }
 
 /***** MAIN *****/
 
 loadCss();
 hideFirstTable();
-if (AMOUNT_OF_ROUNDS > 0) {
-  customizeResultsTable();
-}
+customizeResultsTable();
 
 console.log(VERSION);
