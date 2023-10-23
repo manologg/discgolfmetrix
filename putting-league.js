@@ -1,7 +1,14 @@
 /***** CONSTANTS *****/
 
+var THEAD = $('#id_results thead:last()');
+var TBODY = $('#id_results tbody:last()');
+var AMOUNT_OF_PLAYERS = Number(THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/)[0]);
+var AMOUNT_OF_TOTAL_ROUNDS = TBODY.find('tr').length;
+var AMOUNT_OF_ROUNDS = AMOUNT_OF_TOTAL_ROUNDS / AMOUNT_OF_PLAYERS;
+console.log(`There are ${AMOUNT_OF_PLAYERS} players and ${AMOUNT_OF_TOTAL_ROUNDS} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
+
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '23:28';
+var VERSION = '16:34';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -178,7 +185,6 @@ function calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i) {
   return AMOUNT_OF_ROUNDS - 1 - i % AMOUNT_OF_ROUNDS;
 }
 
-AMOUNT_OF_ROUNDS = 4;
 function setTrSumAndOrder(i, tr) {
   
   if (currentCompetition === ROUND) {
@@ -268,10 +274,8 @@ function displayThPoints(i, th) {
 }
 
 function customizeResultsTable() {
-  var thead = $('#id_results thead:last()');
-  var tbody = $('#id_results tbody:last()');
   
-  removeColors(tbody);
+  removeColors();
   
   var uselessColumns;
   if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
@@ -281,23 +285,23 @@ function customizeResultsTable() {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
   }
   
-  hideColumns(tbody, 'td', uselessColumns);
-  hideColumns(thead, 'th', uselessColumns);
+  hideColumns(TBODY, 'td', uselessColumns);
+  hideColumns(THEAD, 'th', uselessColumns);
   
   var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
   uselessElements.forEach(selector => $(selector).hide());
   
   if (!DEFAULT_POINTS) {
-    thead.find('th')
+    THEAD.find('th')
          .slice(stationsStart, stationsStart + Object.values(POINT_SYSTEM).length)
          .each(displayThPoints);
   }
   
-  tbody.find('tr')
+  TBODY.find('tr')
        .each(setTdSums)
        .each(setTrSumAndOrder)
        .sort((a, b) => getOrder(b) - getOrder(a))
-       .each((i, tr) => $(tr).appendTo(tbody))
+       .each((i, tr) => $(tr).appendTo(TBODY))
        .each(setTrPosition);
 }
 
