@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '17:28';
+var VERSION = '17:57';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -12,6 +12,10 @@ var categoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9
 if (categoryHeader !== null) {
   var amountOfPlayers = Number(categoryHeader[0]);
   var amountOfTotalRounds = TBODY.find('tr').length;
+  if (amountOfPlayers === amountOfTotalRounds) {
+    var AMOUNT_OF_ROUNDS = 0;
+    console.log('No rounds yet!');
+  }
   var AMOUNT_OF_ROUNDS = amountOfTotalRounds / amountOfPlayers;
   console.log(`There are ${amountOfPlayers} players and ${amountOfTotalRounds} rounds --> AMOUNT_OF_ROUNDS=${AMOUNT_OF_ROUNDS}`);
 }
