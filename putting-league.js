@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '17:23';
+var VERSION = '17:28';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -317,6 +317,8 @@ function customizeResultsTable() {
 
 loadCss();
 hideFirstTable();
-customizeResultsTable();
+if (AMOUNT_OF_ROUNDS > 0) {
+  customizeResultsTable();
+}
 
 console.log(VERSION);
