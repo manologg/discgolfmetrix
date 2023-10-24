@@ -119,8 +119,7 @@ function setTdSum(i, td) {
   var score = putts * scoreMultiplicator;
   if (putts == MAX_PUTTS_PER_STATION) {
     score = score + EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE;
-    $(td).addClass('holeinone');
-    //$(td).addClass('tpl-ace').css('background-color', '#ffb400');
+    $(td).addClass('tpl-ace').css('background-color', '#ffb400');
   }
   setData(td, 'putts', putts)
   setData(td, 'score', score);
@@ -130,8 +129,7 @@ function setTdSum(i, td) {
     $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
   }
   if (putts > MAX_PUTTS_PER_STATION) {
-    $(td).addClass('fail');
-    //$(td).addClass('tpl-error');
+    $(td).addClass('tpl-error');
   }
     
   if (DEBUG) {
@@ -164,12 +162,18 @@ function setTdSums(i, tr) {
                    .each(setTdSum)
                    .map((i, td) => getScore(td));
 
-  var sum = Array.from(allScores).reduce((a, b) => a + b);
-
-  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
-    displaySubSum(tr, sum);
+  var someTdHasErrors = $(tr).find('td.tpl-error').length > 0;
+  if (someTdHasErrors) {
+    $(tr).addClass('tpl-error');
   }
-  setData(tr, 'subSum', sum);
+  else {
+    var sum = Array.from(allScores).reduce((a, b) => a + b);
+  
+    if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
+      displaySubSum(tr, sum);
+    }
+    setData(tr, 'subSum', sum);
+  }
 
 }
 
