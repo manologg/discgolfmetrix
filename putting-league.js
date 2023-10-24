@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '10:05';
+var VERSION = '10:09';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -165,6 +165,7 @@ function setTdSums(i, tr) {
   var someTdHasErrors = $(tr).find('td.tpl-error').length > 0;
   if (someTdHasErrors) {
     $(tr).addClass('tpl-error');
+    displaySubSum(tr, '');
   }
   else {
     var sum = Array.from(allScores).reduce((a, b) => a + b);
@@ -219,7 +220,12 @@ function setTrSumAndOrder(i, tr) {
   }
 
   if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
-    displaySum(tr, sum);
+    if (tr.hasClass('tpl-error')) {
+      displaySubSum(tr, '');
+    }
+    else {
+      displaySum(tr, sum);
+    }
   }
   setData(tr, 'sum', sum);
   setData(tr, 'order', sum * 100 + orderModifier);
