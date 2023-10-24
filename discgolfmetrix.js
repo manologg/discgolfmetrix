@@ -1,5 +1,5 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var DGM_VERSION = '00:15';
+var DGM_VERSION = '00:18';
 console.log(`discgolfmetrix.js version: ${DGM_VERSION}`);
 
 function loadCss() {
@@ -98,7 +98,7 @@ function loadSubcompetitionButtons(onlyFuture) {
 
 function showScoringReminderAlert() {
   if (typeof SCORING_REMINDER !== 'undefined') {
-    $('#id_start_desktop, #id_start_mobile').on('click', () => { alert(SCORING_REMINDER););
+    $('#id_start_desktop, #id_start_mobile').on('click', () => { alert(SCORING_REMINDER); });
     console.log(`[discgolfmetrix.js - configured in metrix] Scoring reminder: ${SCORING_REMINDER}`);
   }
   else {
