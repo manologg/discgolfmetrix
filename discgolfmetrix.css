@@ -58,7 +58,7 @@ td.player-cell .expand-arrow:before {
 
 #top-menu-row #top-menu-logo:hover,
 .button:hover {
-    background-color: #ba7596;
+    background-color: #ba7596 !important;
 }
 
 /* GRAY */
