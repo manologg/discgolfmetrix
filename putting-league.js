@@ -1,8 +1,8 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '00:03';
-console.log(VERSION);
+var TPL_VERSION = '00:11';
+console.log(`discgolfmetrix.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // things needed for calculating stuff in the results table
@@ -64,15 +64,6 @@ else {
   origin = METRIX;
 }
 console.log(`[${origin}] If all putts from one station are made the player gets ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} extra points`);
-
-if (typeof SCORING_REMINDER !== 'undefined') {
-  var SCORING_REMINDER_ALERT = () => { alert(SCORING_REMINDER); };
-  console.log(`Scoring reminder: ${SCORING_REMINDER}`);
-}
-else {
-  var SCORING_REMINDER_ALERT = null;
-  console.log('No scoring reminder set');
-}
 
 /***** THOUSAND FUNCTIONS *****/
 
@@ -362,17 +353,10 @@ function customizeResultsTable() {
   }
 }
 
-function showScoringReminderAlert() {
-  if (SCORING_REMINDER_ALERT != null) {
-    $('#id_start_desktop, #id_start_mobile').on('click', SCORING_REMINDER_ALERT);
-  }
-}
-
 /***** MAIN *****/
 
 loadCss();
 hideFirstTable();
 customizeResultsTable();
-showScoringReminderAlert();
 
-console.log(VERSION);
+console.log(`discgolfmetrix.js version: ${TPL_VERSION}`);
