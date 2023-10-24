@@ -56,6 +56,7 @@ td.player-cell .expand-arrow:before {
 
 /* LIGHT SECONDARY */
 
+#top-menu-logo:hover,
 .button:hover {
     background-color: #ba7596;
 }
