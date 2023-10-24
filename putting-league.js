@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '23:35';
+var VERSION = '23:55';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -351,10 +351,18 @@ function customizeResultsTable() {
   }
 }
 
+function showScoringReminderAlert() {
+  if (typeof SCORING_REMINDER !== 'undefined') {
+    var scoringReminderAlert = () => { alert(SCORING_REMINDER); };
+    $('#id_start_desktop, #id_start_mobile').on('click', scoringReminderAlert);
+  }
+}
+
 /***** MAIN *****/
 
 loadCss();
 hideFirstTable();
 customizeResultsTable();
+showScoringReminderAlert();
 
 console.log(VERSION);
