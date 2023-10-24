@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '10:15';
+var VERSION = '10:25';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -131,7 +131,7 @@ function setTdSum(i, td) {
   if (putts > MAX_PUTTS_PER_STATION) {
     $(td).addClass('tpl-error');
   }
-    
+
   if (DEBUG) {
     console.log('td', td);
     console.log(`${i} => ${$(td).text()}: ${putts} * ${scoreMultiplicator} + ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} = ${score}`);
@@ -165,16 +165,14 @@ function setTdSums(i, tr) {
   var someTdHasErrors = $(tr).find('td.tpl-error').length > 0;
   if (someTdHasErrors) {
     $(tr).addClass('tpl-error');
-    displaySubSum(tr, '');
   }
-  else {
-    var sum = Array.from(allScores).reduce((a, b) => a + b);
   
-    if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
-      displaySubSum(tr, sum);
-    }
-    setData(tr, 'subSum', sum);
+  var sum = Array.from(allScores).reduce((a, b) => a + b);
+
+  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
+    displaySubSum(tr, sum);
   }
+  setData(tr, 'subSum', sum);
 
 }
 
@@ -220,12 +218,7 @@ function setTrSumAndOrder(i, tr) {
   }
 
   if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
-    if ($(tr).hasClass('tpl-error')) {
-      displaySubSum(tr, '');
-    }
-    else {
       displaySum(tr, sum);
-    }
   }
   setData(tr, 'sum', sum);
   setData(tr, 'order', sum * 100 + orderModifier);
