@@ -19,6 +19,8 @@ else {
   var AMOUNT_OF_ROUNDS = 0;
   console.log('No players yet!');
 }
+var playedHolesText = TBODY.find('tr').find('td[title="Played holes"]').text();
+var ROUND_STARTED = playedHolesText.replaceAll('-', '').length !== 0;
 
 // Sure, this breaks if you use arrows in the competition's name. Please DON'T
 var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
@@ -305,7 +307,7 @@ function customizeResultsTable() {
          .each(displayThPoints);
   }
 
-  if (AMOUNT_OF_ROUNDS > 0) {
+  if (ROUND_STARTED) {
     TBODY.find('tr')
          .each(setTdSums)
          .each(setTrSumAndOrder)
