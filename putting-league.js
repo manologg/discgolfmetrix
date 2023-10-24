@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '10:44';
+var VERSION = '12:51';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -304,7 +304,7 @@ function customizeResultsTable() {
   hideColumns(TBODY, 'td', uselessColumns);
   hideColumns(THEAD, 'th', uselessColumns);
   
-  var uselessElements = ["h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
+  var uselessElements = [".score-table + br + h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
   uselessElements.forEach(selector => $(selector).hide());
 
   if (!DEFAULT_POINTS) {
