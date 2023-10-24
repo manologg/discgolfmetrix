@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '23:16';
+var VERSION = '23:22';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -314,6 +314,16 @@ function customizeResultsTable() {
                          ".tabs.secondary + br + p + br + a + div + a + div + a",
                          ".tabs.secondary + br + p + br + a + div + a + div + a + p",
                          ".tabs.secondary + br + p + br + a + div + a + div + a + p + br",
+                         ".score-table.live-results",
+                         ".score-table.live-results + p",
+                         ".score-table.live-results + p + br",
+                         ".score-table.live-results + p + br + a",
+                         ".score-table.live-results + p + br + a + div",
+                         ".score-table.live-results + p + br + a + div + a",
+                         ".score-table.live-results + p + br + a + div + a + div",
+                         ".score-table.live-results + p + br + a + div + a + div + a",
+                         ".score-table.live-results + p + br + a + div + a + div + a + p",
+                         ".score-table.live-results + p + br + a + div + a + div + a + p + br",
                          "#hs-switch-1",
                          "#hs-switch-2",
                          "#hs-switch-3",
