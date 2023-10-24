@@ -220,7 +220,7 @@ function setTrSumAndOrder(i, tr) {
   }
 
   if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
-    if (tr.hasClass('tpl-error')) {
+    if ($(tr).hasClass('tpl-error')) {
       displaySubSum(tr, '');
     }
     else {
