@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var VERSION = '23:57';
+var VERSION = '00:03';
 console.log(VERSION);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
@@ -154,7 +154,9 @@ function displaySubSum(tr, sum) {
 }
 
 function displaySum(tr, sum) {
-  $(tr).find('td:last()').text(sum);
+  var lastTd = $(tr).find('td:last()');
+  $(lastTd).text(sum);
+  $(lastTd).append(`<span class="tpl-putts">${$(lastTd).text()}•'</span>`);
 }
 
 var stationsStart;
