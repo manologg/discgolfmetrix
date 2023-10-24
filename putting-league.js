@@ -1,14 +1,14 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '00:15';
+var TPL_VERSION = '00:32';
 console.log(`putting-league.js version: ${TPL_VERSION}`);
-var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
+var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
 
 // things needed for calculating stuff in the results table
 var THEAD = $('#id_results thead:last()');
 var TBODY = $('#id_results tbody:last()');
-var ceategoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/);
+var categoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/);
 if (categoryHeader !== null) {
   var amountOfPlayers = Number(categoryHeader[0]);
   var amountOfTotalRounds = TBODY.find('tr').length;
