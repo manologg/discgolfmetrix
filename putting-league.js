@@ -162,10 +162,11 @@ function setTdSums(i, tr) {
                    .each(setTdSum)
                    .map((i, td) => getScore(td));
 
-  var someTdHasErrors = $(tr).find('td.tpl-error').length > 0;
-  if (someTdHasErrors) {
+  /*
+  if ($(tr).find('td.tpl-error').length > 0) {
     $(tr).addClass('tpl-error');
   }
+  */
   
   var sum = Array.from(allScores).reduce((a, b) => a + b);
 
