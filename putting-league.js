@@ -1,14 +1,14 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '00:11';
-console.log(`discgolfmetrix.js version: ${TPL_VERSION}`);
+var TPL_VERSION = '00:15';
+console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG
 
 // things needed for calculating stuff in the results table
 var THEAD = $('#id_results thead:last()');
 var TBODY = $('#id_results tbody:last()');
-var categoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/);
+var ceategoryHeader = THEAD.find('tr').find('th:nth-child(2)').text().match(/[0-9]+/);
 if (categoryHeader !== null) {
   var amountOfPlayers = Number(categoryHeader[0]);
   var amountOfTotalRounds = TBODY.find('tr').length;
@@ -45,7 +45,7 @@ else {
   DEFAULT_POINTS = false;
   origin = METRIX;
 }
-console.log(`[${origin}] Using point system:`, POINT_SYSTEM);
+console.log(`[putting-league.js - ${origin}] Using point system:`, POINT_SYSTEM);
 
 if (typeof MAX_PUTTS_PER_STATION === 'undefined') {
   MAX_PUTTS_PER_STATION = 3;
@@ -54,7 +54,7 @@ if (typeof MAX_PUTTS_PER_STATION === 'undefined') {
 else {
   origin = METRIX;
 }
-console.log(`[${origin}] Only ${MAX_PUTTS_PER_STATION} putts per station allowed`);
+console.log(`[putting-league.js - ${origin}] Only ${MAX_PUTTS_PER_STATION} putts per station allowed`);
 
 if (typeof EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE === "undefined") {
   EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE = 0;
@@ -63,7 +63,7 @@ if (typeof EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE === "undefined") {
 else {
   origin = METRIX;
 }
-console.log(`[${origin}] If all putts from one station are made the player gets ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} extra points`);
+console.log(`[putting-league.js - ${origin}] If all putts from one station are made the player gets ${EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE} extra points`);
 
 /***** THOUSAND FUNCTIONS *****/
 
@@ -359,4 +359,4 @@ loadCss();
 hideFirstTable();
 customizeResultsTable();
 
-console.log(`discgolfmetrix.js version: ${TPL_VERSION}`);
+console.log(`putting-league.js version: ${TPL_VERSION}`);
