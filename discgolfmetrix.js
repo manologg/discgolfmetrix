@@ -99,10 +99,10 @@ function loadSubcompetitionButtons(onlyFuture) {
 function showScoringReminderAlert() {
   if (typeof SCORING_REMINDER !== 'undefined') {
     $('#id_start_desktop, #id_start_mobile').on('click', () => { alert(SCORING_REMINDER););
-    console.log(`Scoring reminder: ${SCORING_REMINDER}`);
+    console.log(`[discgolfmetrix.js - configured in metrix] Scoring reminder: ${SCORING_REMINDER}`);
   }
   else {
-    console.log('No scoring reminder set');
+    console.log('[discgolfmetrix.js - default] No scoring reminder set');
   }
 }
 
