@@ -304,7 +304,20 @@ function customizeResultsTable() {
   hideColumns(TBODY, 'td', uselessColumns);
   hideColumns(THEAD, 'th', uselessColumns);
   
-  var uselessElements = [".score-table + br + h2", "#hs-switch-1", "#hs-switch-2", "#hs-switch-3", "#hole-stats-charts-container"]
+  var uselessElements = [".tabs.secondary + br",
+                         ".tabs.secondary + br + p",
+                         ".tabs.secondary + br + p + br",
+                         ".tabs.secondary + br + p + br + a",
+                         ".tabs.secondary + br + p + br + a + div",
+                         ".tabs.secondary + br + p + br + a + div + a",
+                         ".tabs.secondary + br + p + br + a + div + a + div",
+                         ".tabs.secondary + br + p + br + a + div + a + div + a",
+                         ".tabs.secondary + br + p + br + a + div + a + div + a + p",
+                         ".tabs.secondary + br + p + br + a + div + a + div + a + p + br",
+                         "#hs-switch-1",
+                         "#hs-switch-2",
+                         "#hs-switch-3",
+                         "#hole-stats-charts-container"];
   uselessElements.forEach(selector => $(selector).hide());
 
   if (!DEFAULT_POINTS) {
