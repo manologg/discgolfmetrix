@@ -119,7 +119,8 @@ function setTdSum(i, td) {
   var score = putts * scoreMultiplicator;
   if (putts == MAX_PUTTS_PER_STATION) {
     score = score + EXTRA_POINTS_IF_ALL_PUTTS_ARE_MADE;
-    $(td).addClass('tpl-ace').css('background-color', '#ffb400');
+    $(td).addClass('holeinone');
+    //$(td).addClass('tpl-ace').css('background-color', '#ffb400');
   }
   setData(td, 'putts', putts)
   setData(td, 'score', score);
@@ -129,7 +130,8 @@ function setTdSum(i, td) {
     $(td).append(`<span class="tpl-putts">${'•'.repeat(putts)}</span>`)
   }
   if (putts > MAX_PUTTS_PER_STATION) {
-    $(td).addClass('tpl-error');
+    $(td).addClass('fail');
+    //$(td).addClass('tpl-error');
   }
     
   if (DEBUG) {
@@ -267,10 +269,10 @@ function hideFirstTable() {
   $('#id_results thead:first()').hide();
 }
 
-function removeColors(tdContainer) {
-  $(tdContainer)
+function removeMetrixColors() {
+  $(TBODY)
     .find('td')
-    .css('background-color', 'unset')
+    .removeClass('holeinone albatross eagle birdie bodey dbogey fail')
 }
 
 function hideColumns(trContainer, columnType, columnSelectors) {
@@ -285,7 +287,7 @@ function displayThPoints(i, th) {
 
 function customizeResultsTable() {
   
-  removeColors();
+  removeMetrixColors();
   
   var uselessColumns;
   if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
