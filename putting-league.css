@@ -13,7 +13,7 @@ td.tpl-points {
   position: relative;
 }
 
-tr.tpl-error > td.player-cell,
+//tr.tpl-error > td.player-cell,
 td.tpl-error {
   background-color: red !important;
 }
