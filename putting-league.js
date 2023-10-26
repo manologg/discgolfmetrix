@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '21:05';
+var TPL_VERSION = '21:15';
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
 
@@ -147,8 +147,8 @@ function displaySubSum(tr, sum) {
 function displaySum(tr, sum) {
   var lastTd = $(tr).find('td:last()');
   $(lastTd).text(sum)
-  $(lastTd).addClass('tpl-points')
-  $(lastTd).append(`<span class="tpl-putts">${$(lastTd).text()}•'</span>`);
+  //$(lastTd).addClass('tpl-points')
+  //$(lastTd).append(`<span class="tpl-putts">${$(lastTd).text()}•'</span>`);
 }
 
 var stationsStart;
