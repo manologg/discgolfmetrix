@@ -2,6 +2,7 @@
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
 var TPL_VERSION = '10:55';
+console.log('----------------------------------');
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
 
@@ -354,3 +355,4 @@ hideFirstTable();
 customizeResultsTable();
 
 console.log(`putting-league.js version: ${TPL_VERSION}`);
+console.log('----------------------------------');
