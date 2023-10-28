@@ -19,16 +19,10 @@ else {
   var AMOUNT_OF_ROUNDS = 0;
   console.log('No players yet!');
 }
+var IS_SINGLE_ROUND = AMOUNT_OF_ROUNDS === 1;
+console.log('Is this a single round?', IS_SINGLE_ROUND);
 var playedHolesText = TBODY.find('tr').find('td[title="Played holes"]').text();
 var ROUND_STARTED = playedHolesText.replaceAll('-', '').length !== 0;
-
-// Sure, this breaks if you use arrows in the competition's name. Please DON'T
-var currentCompetition = $(".main-title").text().match(/→/g)?.length || 0;
-
-// competition levels
-var LEAGUE = 0;
-var TOURNAMENT = 1;
-var ROUND = 2;
 
 // just for debug
 DEFAULT = 'DEFAULT';
