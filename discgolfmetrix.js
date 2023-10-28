@@ -1,5 +1,6 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var DGM_VERSION = '00:18';
+var DGM_VERSION = '10:58';
+console.log('----------------------------------');
 console.log(`discgolfmetrix.js version: ${DGM_VERSION}`);
 
 function loadCss() {
@@ -121,3 +122,4 @@ showScoringReminderAlert();
 $(".breadcrumbs").hide();
 
 console.log(`discgolfmetrix.js version: ${DGM_VERSION}`);
+console.log('----------------------------------');
