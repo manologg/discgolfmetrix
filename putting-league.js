@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '21:15';
+var TPL_VERSION = '10:55';
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
 
@@ -146,10 +146,10 @@ function displaySum(tr, sum) {
 }
 
 var stationsStart;
-if (currentCompetition === ROUND) {
+if (IS_SINGLE_ROUND) {
   stationsStart = 4;
 }
-else if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
+else  {
   stationsStart = 5;
 }
 function setTdSums(i, tr) {
@@ -167,7 +167,7 @@ function setTdSums(i, tr) {
   
   var sum = Array.from(allScores).reduce((a, b) => a + b);
 
-  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
+  if (!IS_SINGLE_ROUND) {
     displaySubSum(tr, sum);
   }
   setData(tr, 'subSum', sum);
@@ -200,11 +200,11 @@ function calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i) {
 
 function setTrSumAndOrder(i, tr) {
   
-  if (currentCompetition === ROUND) {
+  if (IS_SINGLE_ROUND) {
     sum = getSubSum(tr);
     orderModifier = 0;
   }
-  else { // currentCompetition === TOURNAMENT  || currentCompetition === LEAGUE
+  else {
     
     var amountOfPrevRounds = calculateAmountOfPrevRounds(AMOUNT_OF_ROUNDS, i);
     var amountOfNextRounds = calculateAmountOfNextRounds(AMOUNT_OF_ROUNDS, i);
@@ -215,7 +215,7 @@ function setTrSumAndOrder(i, tr) {
     orderModifier = i - innerIndex + revInnerIndex;
   }
 
-  if (currentCompetition === ROUND || ((currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) && i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1)) {
+  if (IS_SINGLE_ROUND || i % AMOUNT_OF_ROUNDS == AMOUNT_OF_ROUNDS - 1) {
       displaySum(tr, sum);
   }
   setData(tr, 'sum', sum);
@@ -229,7 +229,7 @@ function setTrPosition(i, tr) {
   lastSum = getSum(lastTr);
   lastPosition = getPosition(lastTr);
   
-  if (currentCompetition === ROUND) {
+  if (IS_SINGLE_ROUND) {
     
     if (sum == lastSum) {
       position = lastPosition;
@@ -238,8 +238,7 @@ function setTrPosition(i, tr) {
       position = i+1;
     }
   }
-  // currentCompetition === TOURNAMENT || currentCompetition === LEAGUE
-  else if (i % AMOUNT_OF_ROUNDS == 0) { // first row with name
+  else if (i % AMOUNT_OF_ROUNDS == 0) { // first row with name in multiple rounds competition
       if (sum == lastSum) {
         position = lastPosition;
       }
@@ -247,7 +246,7 @@ function setTrPosition(i, tr) {
         position = i / AMOUNT_OF_ROUNDS + 1;
       }
   }
-  else { // other rows
+  else { // other rows in multiple rounds competition
       position = lastPosition;
   }
   if (DEBUG) {
@@ -260,7 +259,7 @@ function setTrPosition(i, tr) {
     console.log('-----------------------------------------')
   }
   setData(tr, 'position', position);
-  if (currentCompetition === ROUND || i % AMOUNT_OF_ROUNDS == 0) { // ONLY first rows in TOURNAMENT and LEAGUE competition
+  if (IS_SINGLE_ROUND || i % AMOUNT_OF_ROUNDS == 0) { // single rounds competition and first rows in multiple rounds competition
     $(tr).find('td:first()').text(position);
   }
 }
@@ -291,11 +290,11 @@ function customizeResultsTable() {
   removeMetrixColors();
   
   var uselessColumns;
-  if (currentCompetition === TOURNAMENT || currentCompetition === LEAGUE) {
-    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
-  }
-  else if (currentCompetition === ROUND) {
+  if (IS_SINGLE_ROUND) {
     uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-last-child(2)'];
+  }
+  else {
+    uselessColumns = ['nth-child(3)', 'nth-child(4)', 'nth-child(5)', 'nth-last-child(4)', 'nth-last-child(2)'];
   }
   
   hideColumns(TBODY, 'td', uselessColumns);
