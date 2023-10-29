@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '10:55';
+var TPL_VERSION = '18:24';
 console.log('----------------------------------');
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
@@ -24,6 +24,7 @@ var IS_SINGLE_ROUND = AMOUNT_OF_ROUNDS === 1;
 console.log('Is this a single round?', IS_SINGLE_ROUND);
 var playedHolesText = TBODY.find('tr').find('td[title="Played holes"]').text();
 var ROUND_STARTED = playedHolesText.replaceAll('-', '').length !== 0;
+console.log('Has the round started?', ROUND_STARTED);
 
 // just for debug
 DEFAULT = 'DEFAULT';
