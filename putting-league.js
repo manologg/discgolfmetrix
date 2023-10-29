@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '18:24';
+var TPL_VERSION = '18:30';
 console.log('----------------------------------');
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
@@ -19,11 +19,13 @@ if (categoryHeader !== null) {
 else {
   var AMOUNT_OF_ROUNDS = 0;
   console.log('No players yet!');
+  $('#id_results').append('<div>No players yet</div>');
 }
 var IS_SINGLE_ROUND = AMOUNT_OF_ROUNDS === 1;
 console.log('Is this a single round?', IS_SINGLE_ROUND);
 var playedHolesText = TBODY.find('tr').find('td[title="Played holes"]').text();
-var ROUND_STARTED = playedHolesText.replaceAll('-', '').length !== 0;
+var scoresHoles = playedHolesText.replaceAll('-', '').length;
+var ROUND_STARTED = AMOUNT_OF_ROUNDS > 0 && scoredHoles > 0;
 console.log('Has the round started?', ROUND_STARTED);
 
 // just for debug
