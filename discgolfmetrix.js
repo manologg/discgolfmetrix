@@ -61,7 +61,7 @@ function loadSubcompetitionButtons(onlyFuture) {
             };
             const childName = (competition) => competition.Name.split(" &rarr; ").pop();
             const appendSubcompetition = (competition) => {
-                if (!onlyFuture || competition.Date > today) {
+                if ((!onlyFuture || competition.Date > today) && competition.Name.match(SHOW_SUBCOMPETITIONS_REGEX) !== null) {
                             $("#subcompetitions").append(`<a
                                                                 class='button'
                                                                 href='https://discgolfmetrix.com/${competition.ID}'
@@ -115,6 +115,13 @@ if (typeof image !== "undefined") {
     //loadBanner(image); Metrix added its own banner, this is not needed anymore
 }
 const onlyFuture = (typeof showOnlyFutureSubcompetitions !== "undefined") && showOnlyFutureSubcompetitions; // default: show all
+if (typeof SHOW_SUBCOMPETITIONS_REGEX !== 'undefined') {
+    console.log(`[discgolfmetrix.js - configured in metrix] Regex for filtering subcompetitions: ${SHOW_SUBCOMPETITIONS_REGEX}`);
+}
+else {
+ SHOW_SUBCOMPETITIONS_REGEX = /.*/;
+ console.log('[discgolfmetrix.js - default] No regex for filtering subcompetitions was set');
+}
 loadSubcompetitionButtons(onlyFuture);
 
 showScoringReminderAlert();
