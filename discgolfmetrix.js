@@ -1,5 +1,5 @@
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var DGM_VERSION = '10:58';
+var DGM_VERSION = '08:12';
 console.log('----------------------------------');
 console.log(`discgolfmetrix.js version: ${DGM_VERSION}`);
 
@@ -61,6 +61,7 @@ function loadSubcompetitionButtons(onlyFuture) {
             };
             const childName = (competition) => competition.Name.split(" &rarr; ").pop();
             const appendSubcompetition = (competition) => {
+                console.log(`${competition.Name}: ${competition.Name.match(SHOW_SUBCOMPETITIONS_REGEX)}`);
                 if ((!onlyFuture || competition.Date > today) && competition.Name.match(SHOW_SUBCOMPETITIONS_REGEX) !== null) {
                             $("#subcompetitions").append(`<a
                                                                 class='button'
