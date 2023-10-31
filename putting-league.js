@@ -24,7 +24,7 @@ else {
 var IS_SINGLE_ROUND = AMOUNT_OF_ROUNDS === 1;
 console.log('Is this a single round?', IS_SINGLE_ROUND);
 var playedHolesText = TBODY.find('tr').find('td[title="Played holes"]').text();
-var scoresHoles = playedHolesText.replaceAll('-', '').length;
+var scoredHoles = playedHolesText.replaceAll('-', '').length;
 var ROUND_STARTED = AMOUNT_OF_ROUNDS > 0 && scoredHoles > 0;
 console.log('Has the round started?', ROUND_STARTED);
 
