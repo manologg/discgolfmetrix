@@ -1,7 +1,7 @@
 /***** CONSTANTS *****/
 
 var REPO_BASE_URL = "https://raw.githubusercontent.com/manologg/discgolfmetrix/main/";
-var TPL_VERSION = '18:30';
+var TPL_VERSION = '17:49';
 console.log('----------------------------------');
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 var DEBUG = (typeof DEBUG !== "undefined") && DEBUG;
