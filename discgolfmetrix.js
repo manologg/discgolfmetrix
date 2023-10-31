@@ -61,7 +61,6 @@ function loadSubcompetitionButtons(onlyFuture) {
             };
             const childName = (competition) => competition.Name.split(" &rarr; ").pop();
             const appendSubcompetition = (competition) => {
-                console.log(`${competition.Name}: ${competition.Name.match(SHOW_SUBCOMPETITIONS_REGEX)}`);
                 if ((!onlyFuture || competition.Date > today) && competition.Name.match(SHOW_SUBCOMPETITIONS_REGEX) !== null) {
                             $("#subcompetitions").append(`<a
                                                                 class='button'
