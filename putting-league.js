@@ -351,11 +351,18 @@ function customizeResultsTable() {
   }
 }
 
+function alternateTableColors() {
+  for (i=0;i<AMOUNT_OF_ROUNDS;i++){
+    TBODY.find(`tr:nth-child(${AMOUNT_OF_ROUNDS*2}n-${i})`).css("background-color","#e8e9ea");
+  }
+}
+
 /***** MAIN *****/
 
 loadCss();
 hideFirstTable();
 customizeResultsTable();
+alternateTableColors()
 
 console.log(`putting-league.js version: ${TPL_VERSION}`);
 console.log('----------------------------------');
