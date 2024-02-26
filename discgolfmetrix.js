@@ -33,20 +33,6 @@ function isMobile() {
     return window.matchMedia("only screen and (max-width: 1024px)").matches;
 }
 
-function loadBanner(image) {
-    const childName = $("#competition-submenu .selected b").text();
-    const textRegex = /#\d+|\d+er\ Runde|Finale|\d+\.\ Runde/gm;
-    const bannerText = (childName.match(textRegex) || ['']).pop(); // empty in case it doesn't match
-    const largerClass = bannerText.length < 4 ? 'larger' : ''; // if the name is something like "#123" it will be larger
-    const bannerDiv = `<div id='competition-banner'><img src='${image}'></img><span class='${largerClass}'>${bannerText}</span></div>`;
-    if (isMobile()) {
-        $("#content").before(`<div class='mobile'>${bannerDiv}</div>`);
-    }
-    else {
-        $(".breadcrumbs").after(`<div class='desktop'>${bannerDiv}</div>`);
-    }
-}
-
 function loadSubcompetitionButtons(onlyFuture) {
     $.ajax({
         type: "GET",
@@ -111,9 +97,6 @@ function showScoringReminderAlert() {
 
 loadCss();
 fixIcons();
-if (typeof image !== "undefined") {
-    //loadBanner(image); Metrix added its own banner, this is not needed anymore
-}
 const onlyFuture = (typeof showOnlyFutureSubcompetitions !== "undefined") && showOnlyFutureSubcompetitions; // default: show all
 if (typeof SHOW_SUBCOMPETITIONS_REGEX !== 'undefined') {
     console.log(`[discgolfmetrix.js - configured in metrix] Regex for filtering subcompetitions: ${SHOW_SUBCOMPETITIONS_REGEX}`);
