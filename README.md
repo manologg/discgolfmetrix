@@ -5,7 +5,7 @@ To be used with the following source code in the public text field
 ```html
 <script>
 
-    /// basic colors
+    // basic colors
     primaryColor = "#1b2633";
     secondaryColor = "#8d1950";
     lightSecondaryColor = "#ba7596";
