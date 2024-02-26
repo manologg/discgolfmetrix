@@ -6,10 +6,10 @@ To be used with the following source code in the public text field
 <script>
 
     /// basic colors
-
-    primaryColor = "#000000";
-    secondaryColor = "#950710";
-    lightSecondaryColor = "#bb5f65";
+    primaryColor = "#1b2633";
+    secondaryColor = "#8d1950";
+    lightSecondaryColor = "#ba7596";
+    lighterSecondaryColor = "#f6e7ee;
 
     // only needed if you only want to show future subcompetitions (not all) like in Tremonia Series
     showOnlyFutureSubcompetitions = false;
