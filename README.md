@@ -14,9 +14,6 @@ To be used with the following source code in the public text field
     // only needed if you only want to show future subcompetitions (not all) like in Tremonia Series
     showOnlyFutureSubcompetitions = false;
 
-    // only needed if you want to have a banner
-    image = "https://i0.wp.com/flightcadets.com/wp-content/uploads/2023/07/XI-4.png?resize=1067%2C264";
-
     // needed if you want to add an alert that appear when you click on the "Enter" scores button
     SCORING_REMINDER = 'Erinnerung: du musst nur die Anzahl an erfolgreichen Putts eingetragen!';
 
