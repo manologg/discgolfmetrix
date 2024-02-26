@@ -79,57 +79,6 @@ td.player-cell .expand-arrow:before {
     color: white !important;
 }
 
-/* BANNER */
-
-#competition-banner {
-    position: relative;
-}
-
-#competition-banner img {
-    width: 100%;
-    height: auto;
-}
-
-#competition-banner span {
-    position: absolute;
-    font-family: Impact, fantasy;
-    transform: rotate(356deg);
-}
-
-/* mobile */
-@media only screen and (max-width: 1024px) {
-    .desktop {
-        display: none;
-    }
-
-    #competition-banner span {
-        bottom: 2rem;
-        right: 0.5rem;
-        font-size: 1.25rem;
-    }
-
-    #competition-banner span.larger {
-        font-size: 2rem;
-    }
-}
-
-/* desktop */
-@media only screen and (min-width: 1024px) {
-    .mobile {
-        display: none;
-    }
-
-    #competition-banner span {
-        bottom: 6rem;
-        right: 1rem;
-        font-size: 3rem;
-    }
-
-    #competition-banner span.larger {
-        font-size: 5rem;
-    }
-}
-
 /* BUTTONS */
 
 #subcompetitions {
